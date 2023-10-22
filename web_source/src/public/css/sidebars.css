@@ -1,0 +1,7 @@
+.sidebar-item {
+    border-radius: 25px;
+}
+
+.sidebar-item:hover {
+    background: #E8DEF8;
+}
