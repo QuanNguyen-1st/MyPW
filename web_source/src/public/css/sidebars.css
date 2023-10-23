@@ -3,5 +3,9 @@
 }
 
 .sidebar-item:hover {
+    background: rgb(235, 229, 246);
+}
+
+.sidebar-item.active {
     background: #E8DEF8;
 }
