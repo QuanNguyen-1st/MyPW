@@ -5,6 +5,7 @@ class FeedbackController {
             feedbackActive: true
         });
     }
+    
 }
 
 module.exports = new FeedbackController;
