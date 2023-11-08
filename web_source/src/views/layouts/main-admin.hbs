@@ -30,13 +30,13 @@
         <!-- Sidebar + Content -->
         <div class="d-flex">
             <!-- Sidebar -->
-            <div class="d-flex flex-column flex-shrink-0 p-0" style="width: 325px; height: 87.9vh; background: #F7F2FA;">
-                <a href="/homepage" class="m-4 d-flex align-items-center me-md-auto link-dark text-decoration-none">
+            <div class="d-flex flex-column flex-shrink-0 p-0" style="width: 250px; height: 87.9vh; background: #F7F2FA;">
+                <a href="/admin-homepage" class="m-4 d-flex align-items-center me-md-auto link-dark text-decoration-none">
                 <span class="fs-5">MYPW SERVICES</span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-auto px-2">
                 <li class="nav-item sidebar-item {{#if homepageActive}} active {{/if}}">
-                    <a href="/homepage" class="nav-link link-dark" aria-current="page">
+                    <a href="/admin-homepage" class="nav-link link-dark" aria-current="page">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
                     <circle cx="8" cy="6" r="5"></circle>
                     </svg>
@@ -44,48 +44,48 @@
                     </a>
                 </li>
                 <li class="nav-item sidebar-item {{#if passmanActive}} active {{/if}}">
-                    <a href="/passman" class="nav-link link-dark" aria-current="page">
+                    <a href="/admin-passman" class="nav-link link-dark" aria-current="page">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
                     <circle cx="8" cy="6" r="5"></circle>
                     </svg>
-                    <span class="px-2 fs-5">Password Management</span>
+                    <span class="px-2 fs-5">Manager</span>
                     </a>
                 </li>
                 <li class="nav-item sidebar-item {{#if passgenActive}} active {{/if}}">
-                    <a href="/passgen" class="nav-link link-dark" aria-current="page">
+                    <a href="/admin-passgen" class="nav-link link-dark" aria-current="page">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
                     <circle cx="8" cy="6" r="5"></circle>
                     </svg>
-                    <span class="px-2 fs-5">Password Generator</span>
+                    <span class="px-2 fs-5">Generator</span>
                     </a>
                 </li>
                 <li class="nav-item sidebar-item {{#if feedbackActive}} active {{/if}}">
-                    <a href="/feedback" class="nav-link link-dark" aria-current="page">
+                    <a href="/admin-feedback" class="nav-link link-dark" aria-current="page">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
                     <circle cx="8" cy="6" r="5"></circle>
                     </svg>
                     <span class="px-2 fs-5">Feedback</span>
                     </a>
                 </li>
-                <li class="nav-item sidebar-item">
-                    <a href="#" class="nav-link link-dark">
+                <li class="nav-item sidebar-item {{#if userlistActive}} active {{/if}}">
+                    <a href="/user-list" class="nav-link link-dark">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
                     <circle cx="8" cy="6" r="5"></circle>
                     </svg>
-                    <span class="px-2 fs-5">User Management</span>
+                    <span class="px-2 fs-5">User Manager</span>
                     </a>
                 </li>
-                <li class="nav-item sidebar-item">
-                    <a href="#" class="nav-link link-dark">
+                <li class="nav-item sidebar-item {{#if userinfoActive}} active {{/if}}">
+                    <a href="/admin-userinfo" class="nav-link link-dark">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
                     <circle cx="8" cy="6" r="5"></circle>
                     </svg>
-                    <span class="px-2 fs-5">Logout</span>
+                    <span class="px-2 fs-5">User Info</span>
                     </a>
                 </li>
                 </ul>
                 
-                <div class="p-3" style="background: #E6E0E9; border-radius:10px">
+                <div class="p-3" style="background: #cbcbcb; border-radius:10px">
                     <span class="fs-4 fw-bold">CONTACT US</span><br>
                     <span class="ps-4" style="font-size:0.75rem !important">268 Lý Thường Kiệt, P.14, Q.10, TP.HCM</span><br>
                     <span class="ps-4" style="font-size:0.75rem !important">113</span><br>

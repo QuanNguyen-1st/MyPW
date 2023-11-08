@@ -67,8 +67,18 @@
                     <span class="px-2 fs-5">Feedback</span>
                     </a>
                 </li>
-                <li class="nav-item sidebar-item">
-                    <a href="#" class="nav-link link-dark">
+                {{!-- {{#if isAdmin}} 
+                <li class="nav-item sidebar-item {{#if userlistActive}} active {{/if}}">
+                    <a href="/user-list" class="nav-link link-dark">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                    <circle cx="8" cy="6" r="5"></circle>
+                    </svg>
+                    <span class="px-2 fs-5">User Manager</span>
+                    </a>
+                </li>
+                {{/if}} --}}
+                <li class="nav-item sidebar-item {{#if userinfoActive}} active {{/if}}">
+                    <a href="/userinfo" class="nav-link link-dark">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
                     <circle cx="8" cy="6" r="5"></circle>
                     </svg>
