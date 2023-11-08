@@ -7,7 +7,11 @@ const feedbackRouter = require('./feedback');
 const userinfoRouter = require('./userinfo');
 
 const adminHomepageRouter = require('./adminHomepage');
+const adminPassmanRouter = require('./adminPassman');
+const adminPassgenRouter = require('./adminPassgen');
+const adminFeedbackRouter = require('./adminFeedback');
 const adminUserListRouter = require('./adminUserList');
+const adminInfoRouter = require('./adminInfo');
 
 function route(app) {
     app.use('/login', loginRouter);
@@ -19,7 +23,11 @@ function route(app) {
     app.use('/userinfo', userinfoRouter);
     
     app.use('/admin-homepage', adminHomepageRouter);
+    app.use('/admin-passman', adminPassmanRouter);
+    app.use('/admin-passgen', adminPassgenRouter);
+    app.use('/admin-feedback', adminFeedbackRouter);
     app.use('/user-list', adminUserListRouter);
+    app.use('/admin-info', adminInfoRouter);
 }
 
 module.exports = route;
