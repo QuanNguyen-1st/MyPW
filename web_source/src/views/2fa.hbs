@@ -1,3 +1,31 @@
+<style>
+    .verification-code {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    .verification-square {
+        width: 50px;
+        height: 50px;
+        border: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        text-align: center;
+        border-radius: 15px;
+        border-color:  black;
+    }
+
+    .custom-modal {
+        max-width: 25%;
+        margin-top: 50px;
+    }
+
+</style>
+
 <div class="w-50 d-flex justify-content-center align-items-center" style="
     min-height: 75%; aspect-ratio: 1/1;;background-color:#ffffff; border-radius:10%;
     box-shadow: 20px 20px 20px 0px #00000040;
@@ -6,7 +34,7 @@
         <div class="text-center">
             <span class="fs-1 fw-bold">FORGOT PASSWORD</span>
         </div>
-        <form class="w-100" method="post" action="login">
+        {{!-- <form class="w-100" method="post" action="login"> --}}
             <div class="account pt-5 d-flex align-items-center">
                 <div style="width:15%;"><i class="bi bi-person-fill fs-1"></i></div>
                 <input id="username" name="username" class="account-child border text-center fs-5 bg-light" placeholder="Username" style="border-radius:10px;width:70%;min-height:50px;">
@@ -16,15 +44,64 @@
                 <input type="email" id="email" name="email" class="account-child border text-center fs-5 bg-light" placeholder="Email" style="border-radius:10px;width:70%;min-height:50px;">
             </div>
             <div class="pt-2">
-                <a href="#" class="fs-4" style="
+                <a href="/login" class="fs-4" style="
                     text-decoration: none;
                 ">
                     Back to Sign In
                 </a>
             </div>
-            <div class="d-flex justify-content-center align-items-center pt-4"><button class="btn btn-primary fs-3" style="border-radius: 10px;">Send</button ></div>
-            
-        </form>
+            <div class="d-flex justify-content-center align-items-center pt-4"><button class="btn btn-primary fs-3" style="border-radius: 10px;" onclick="showPanel()">Send</button ></div>
+
+        {{!-- </form> --}}
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<div class="modal fade" id="verificationCodeModal" tabindex="-1" role="dialog" aria-labelledby="verificationCodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal" role="document">
+        <div class="modal-content" style="background: #D9D9D9E5;">
+            <div class="modal-header d-flex justify-content-center">
+                <h5 class="modal-title" id="verificationCodeModalLabel">Verification Code</h5>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+            <div class="modal-body d-flex flex-column text-center">
+                <div>We have sent the verification code to your email address</div>
+                <div class="verification-code">
+                    <input type="text" class="verification-square" id="digit1" maxlength="1">
+                    <input type="text" class="verification-square" id="digit2" maxlength="1">
+                    <input type="text" class="verification-square" id="digit3" maxlength="1">
+                    <input type="text" class="verification-square" id="digit4" maxlength="1">
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function showPanel() {
+        // Show the Bootstrap modal
+        $('#verificationCodeModal').modal('show');
+        // Prevent the form from submitting immediately
+        return false;
+    }
+
+    function submitForm() {
+        var digit1 = document.getElementById('digit1').value;
+        var digit2 = document.getElementById('digit2').value;
+        var digit3 = document.getElementById('digit3').value;
+        var digit4 = document.getElementById('digit4').value;
+
+        var verificationCode = digit1 + digit2 + digit3 + digit4;
+
+        $('#verificationCodeModal').modal('hide');
+    }
+</script>   
