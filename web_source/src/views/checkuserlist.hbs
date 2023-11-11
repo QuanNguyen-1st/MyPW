@@ -280,7 +280,6 @@
         height: 40px;
         background: #56B8FF;
         border-radius: 20px;
-        font-style: normal;
         font-weight: 500;
         font-size: 20px;
         line-height: 29px;
@@ -290,6 +289,8 @@
         justify-content: center;
         text-align: center;
         color: #FFFFFF;
+        text-decoration: none !important;
+        float: right;
     }
 </style>
 <div class="user-list-container">
@@ -343,7 +344,9 @@
                     <h5 style="flex:0.8">69</h5>
                     <h5 style="flex:0.8; color: lawngreen">ON</h5>
                     <div class="user-list__item__view-btn-contain">
-                        <div class="user-list__item__view-btn">View</div>
+                        <a href="/user-list/check-user-info">
+                            <div class="user-list__item__view-btn">View</div>
+                        </a>
                     </div>
                 </div>
                 <div class=" = user-list__item">

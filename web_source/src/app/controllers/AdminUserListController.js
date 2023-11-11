@@ -13,6 +13,12 @@ class AdminUserListController {
             userlistActive: true
         });
     }
+    OpenCheckUserInfoForm(req, res, next) {
+        res.render('checkuserinfo', {
+            layout: 'main-admin',
+            userlistActive: true
+        });
+    }
 }
 
 module.exports = new AdminUserListController;
