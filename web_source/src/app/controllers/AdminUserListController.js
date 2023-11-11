@@ -19,6 +19,12 @@ class AdminUserListController {
             userlistActive: true
         });
     }
+    OpenCheckFrequenceForm(req, res, next) {
+        res.render('checkfrequence', {
+            layout: 'main-admin',
+            userlistActive: true
+        });
+    }
 }
 
 module.exports = new AdminUserListController;
