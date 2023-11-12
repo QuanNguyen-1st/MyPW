@@ -2,6 +2,7 @@ const loginRouter = require('./login');
 
 const homepageRouter = require('./homepage');
 const passmanRouter = require('./passman');
+const passinfoRouter = require('./passinfo');
 const passgenRouter = require('./passgen');
 const feedbackRouter = require('./feedback');
 const userinfoRouter = require('./userinfo');
@@ -18,6 +19,7 @@ function route(app) {
     
     app.use('/homepage', homepageRouter);
     app.use('/passman', passmanRouter);
+    app.use('/passinfo', passinfoRouter);
     app.use('/passgen', passgenRouter);
     app.use('/feedback', feedbackRouter);
     app.use('/userinfo', userinfoRouter);
