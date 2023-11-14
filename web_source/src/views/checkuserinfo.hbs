@@ -9,6 +9,7 @@
         border: none;
         text-align: center;
     }
+
     .circle {
         background-color: #33A0F2;
         border-radius: 50%;
@@ -19,39 +20,41 @@
         font-weight: bold;
         width: 150px;
         height: 150px;
-    }          
+    }
 
     .info-container {
         margin-top: 30px;
     }
 
-    .info-container .row1{
-        margin-bottom: 50px;
-    }
+        .info-container .row1 {
+            margin-bottom: 50px;
+        }
 
-    .info-container .row1 strong {
-        background-color: #E6E0E9;
-        border-radius: 10px;
-        padding: 5px 10px;
-        width: 80%;
-        text-align: center;
-    }
+            .info-container .row1 strong {
+                background-color: #E6E0E9;
+                border-radius: 10px;
+                padding: 5px 10px;
+                width: 80%;
+                text-align: center;
+            }
 
-    .info-container .row2 li {
-        list-style: none;
-    }
+        .info-container .row2 li {
+            list-style: none;
+        }
 
-    .info-container .row2 a{
-        text-decoration: none;
-    }
+        .info-container .row2 a {
+            text-decoration: none;
+        }
 
     .editprofile {
         text-align: right;
         width: 100%;
     }
-    .enable-text{
+
+    .enable-text {
         color: lawngreen;
     }
+
     .enable-btn {
         width: 70px;
         height: 30px;
@@ -68,7 +71,6 @@
         text-align: center;
         color: #FFFFFF;
     }
-   
 </style>
 <div class="info-container">
     <div class="container-fluid row row1">
@@ -98,11 +100,13 @@
                     <li class="contentnode"><dl><dt>Country</dt><dd>Viet Nam</dd></dl></li>
                     <li class="contentnode"><dl><dt>Today access</dt><dd>2</dd></dl></li>
                     <li class="contentnode"><dl><dt>Total access</dt><dd>69</dd></dl></li>
-                    <li class="contentnode"><dl>
-                        <dt>Enable</dt>
-                        <dd class="enable-text">ON</dd>
-                        <dd class="enable-btn" type="button" onclick="toggleEnableUser()">Disable</dd>
-                    </dl></li>
+                    <li class="contentnode">
+                        <dl>
+                            <dt>Enable</dt>
+                            <dd class="enable-text">ON</dd>
+                            <dd class="enable-btn" type="button" onclick="setModalText()" data-bs-toggle="modal" data-bs-target="#exampleModal">Disable</dd>
+                        </dl>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -118,9 +122,29 @@
     </div>
 </div>
 
-<script type="text/javascript"> 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ANNOUNCE</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <!--<span aria-hidden="true">&times;</span>-->
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to disable this user?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                <button type="button" class="btn btn-primary" onclick="toggleEnableUser()" data-bs-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
     function toggleEnableUser() {
-        console.log("A");
         var enableBtn = document.querySelector('.enable-btn');
         var btnText = enableBtn.textContent.trim(); // Lấy nội dung hiện tại của nút
         var enableText = document.querySelector('.enable-text');
@@ -128,7 +152,7 @@
         if (btnText === 'Disable') {
             enableBtn.textContent = 'Enable';
             enableText.textContent = 'OFF';
-            enableText.style.color = 'red'
+            enableText.style.color = 'red';
         }
         else {
             enableBtn.textContent = 'Disable';
@@ -136,5 +160,17 @@
             enableText.style.color = 'lawngreen'
         }
         //TODO
+    }
+    function setModalText() {
+        var enableBtn = document.querySelector('.enable-btn');
+        var btnText = enableBtn.textContent.trim(); // Lấy nội dung hiện tại của nút
+        var modalBodyText = document.querySelector('.modal-body');
+
+        if (btnText === 'Disable') {
+            modalBodyText.textContent = 'Do you want to disable this user?';
+        }
+        else {
+            modalBodyText.textContent = 'Do you want to enable this user?';
+        }
     }
 </script>
