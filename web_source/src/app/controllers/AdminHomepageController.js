@@ -1,7 +1,7 @@
 class AdminHomepageController {
     // [GET] /
     index(req, res, next) {
-        res.render('homepage', {
+        res.render('adminHomepage', {
             layout: 'main-admin',
             homepageActive: true
         });
