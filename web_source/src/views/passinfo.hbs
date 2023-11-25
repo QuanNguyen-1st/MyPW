@@ -27,13 +27,98 @@
                 
             </div>
             <div class="btn-container">
-                <button class="edit-btn">Edit</button>
-                <button class="analyse-btn">Analyse</button>
+                <button class="btn edit-btn" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+                <button class="analyse-btn" data-bs-toggle="modal" data-bs-target="#analyseModal">Analyse</button>
             </div>
         </div>
         <div class="image">
             <img src="/img/detail_img.png" alt="Password Detail">
         </div>
     </div>
-
 </div>
+
+
+{{!-- Edit modal --}}
+<div class="modal fade" id="editModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">     
+                <div class="modalTitle" style="text-align: center;">Edit Password</div>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Old Password">
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="New Password">
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Confirm Password">
+                <button class="btn btn-primary" style="margin-inline:auto" data-bs-target="#verificationModal" data-bs-toggle="modal" >Confirm</button>        
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Verify Modal --}}
+<div class="modal fade" id="verificationModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+                <div class="modalTitle" style="text-align: center;">Verification Code</div>
+                <div class="notice">We have sent the verification code to your email address</div>
+                <div class="inputs d-flex flex-row justify-content-center mt-2 mb-2" id="otp">
+                    <input class="m-2 text-center form-control rounded" type="text" id="first" maxlength="1" /> 
+                    <input class="m-2 text-center form-control rounded" type="text" id="second" maxlength="1" /> 
+                    <input class="m-2 text-center form-control rounded" type="text" id="third" maxlength="1" /> 
+                    <input class="m-2 text-center form-control rounded" type="text" id="fourth" maxlength="1" /> 
+                </div>
+                <button class="btn btn-primary" style="margin-inline:auto" >OK</button>        
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Analyse Modal --}}
+<div class="modal fade" id="analyseModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal body -->
+      <div class="modal-body">
+                <div class="modalTitle" style="text-align: center;">Analyse Password</div>
+                <div class="analyseRes"></div>
+                <button class="btn btn-primary" style="margin-inline:auto" data-bs-target="#analyseModal" data-bs-toggle="modal" data-bs-dismiss="modal">OK</button>        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        function OTPInput() {
+            const inputs = document.querySelectorAll('#otp > *[id]');
+            for (let i = 0; i < inputs.length; i++) { 
+                inputs[i].addEventListener('keydown', function(event) { 
+                    if (event.key==="Backspace" ) { 
+                        inputs[i].value='' ; 
+                        if (i !==0) inputs[i - 1].focus(); 
+                    } 
+                    else { 
+                        if (i===inputs.length - 1 && inputs[i].value !=='' ) { 
+                            return true; 
+                        } 
+                        else if (event.keyCode> 47 && event.keyCode < 58) { 
+                            inputs[i].value=event.key; 
+                            if (i !==inputs.length - 1) inputs[i + 1].focus(); 
+                            event.preventDefault(); 
+                        } 
+                        else if (event.keyCode> 64 && event.keyCode < 91) { 
+                            inputs[i].value=String.fromCharCode(event.keyCode); 
+                            if (i !==inputs.length - 1) inputs[i + 1].focus(); 
+                            event.preventDefault();
+                        }
+                    } 
+                });
+            } 
+        } 
+        OTPInput();
+
+                
+    });
+</script>
