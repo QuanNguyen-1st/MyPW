@@ -1,172 +1,126 @@
-{{!-- Homepage-info --}}
-<div class="container d-flex" style=" padding-top: 10px">
-    <div class="col-6" style="background-color: rgba(230, 224, 233, 1); margin-right: 10px; margin-left: 20px; border-radius: 5px; box-shadow: 2px 2px rgba(0, 0, 0, 0.1); border: 1px solid rgba(0, 0, 0, 0.2)">
-        <div style="padding: 10px">
-            <div style="padding: 5px; padding-top: 20px">
-                <span style="font-size:x-large"><center> <b>Generate your password</b></center></span>
-            </div>
-            <div class="d-grid" style="padding-top: 30px; padding-left: 3rem; padding-right: 3rem;">
-                <button type="button" class="btn btn-primary btn-lg btn-block" style="border-radius: 10px" onclick="window.location.href='/passgen'">Generate</button>
+<link rel="stylesheet" href="/css/home.css">
+<div class="container">
+    {{!-- Homepage title --}}
+    <div class="row home-title" style="padding-top: 20px">
+        <div class="row col-6 justify-content-center">
+            <div class="col-11 home-title-card">
+                <div style="padding: 10px">
+                    <div style="padding: 5px;">
+                        <span style="font-size:large"><center> <b>Generate your new password</b></center></span>
+                    </div>
+                    <div class="d-grid" style="padding-top: 50px; padding-left: 3rem; padding-right: 3rem;">
+                        <button type="button" class="btn btn-primary btn-lg btn-block" style="border-radius: 10px" onclick="window.location.href='/passgen'">Generate</button>
+                    </div>
+                </div>    
             </div>
         </div>
-    </div>
-    <div class="col-6" style="background-color: rgba(230, 224, 233, 1); margin-left: 10px; margin-right: 20px; border-radius: 5px; box-shadow: 2px 2px rgba(0, 0, 0, 0.1); border: 1px solid rgba(0, 0, 0, 0.1)">
-        <div style="padding: 10px">
-            <div style="padding: 5px; background-color: background: rgba(230, 224, 233, 1);box-shadow: 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px;">
-                <span style="font-size: = large;">Welcome back, User full name</span>
-            </div>
-            <div class="row">
-                <div class="col-6" style="padding: 5px">
-                    <center>
-                        <div style="width: 120px; height: 120px; border-radius: 50%; border: 1px solid grey; overflow:hidden">
-                            <img src="img/hcmut.png" alt="Image description" style="width: 100%; height: auto; display:block">
+        <div class="row col-6 justify-content-center"> 
+            <div class="col-11 home-title-card">
+                <div style="padding: 10px;">
+                    <div style="padding: 5px; background-color: rgb(243, 238, 246)">
+                        <span> Welcome back! <b>{{username}} NGUYEN VAN A </b></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-6" style="padding: 5px">
+                            <center>
+                                <div style="width: 120px; height: 120px; border-radius: 50%; border: 1px solid grey; overflow:hidden">
+                                    <img src="https://img.hoidap247.com/picture/question/20210531/large_1622431721191.jpg?v=0" alt="Avatar" class="avatar circle">
+                                </div>
+                            </center>
                         </div>
-                    </center>
-                </div>
-                <div class="col-6" style="padding: 5px">
-                    <center>
-                        <div style="font-size:large;text-align: left;">
-                            <p> Username: username <br> Email: email <br> </p>
+                        <div class="col-6" style="padding: 5px">
+                            <center>
+                                <div style="font-size:large;text-align: left; padding-top: 50px">
+                                    <a style="text-decoration: none;" onclick="window.location.href='/userinfo'"> UserID: <b> {{username}} 1234</b> </a> 
+                                </div>
+                            </center>
                         </div>
-                    </center>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div> 
-
-<div class="container d-flex justify-content-between" style= "padding-top: 30px; padding-left:30px; border:rgba(0, 0, 0, 0.1);overflow-y:auto; max-height:300px">
-    <div class="col-6" style="padding-right: 10px;">
-        <div class="row">
-            <div class="col-10">
-                <span style="font-size: x-large"><b>Recent</b></span>
-            </div>
-            <div class="col-2 d-grid" >
-                <class button type="button" class="btn btn-outline-dark bth-sm btn-block" style="border-radius: 10px; font-size:11px" onclick="window.location.href='/homepage'">View All</button>
-            </div>
-        </div>
-        <div class="list-group" style"">
-            <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>
-            <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>
-            <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>
-            <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="col-6" style="padding-left: 10px">
-        <div class="row">
-            <div class="col-10">
-                <span style="font-size: x-large"><b>Oldest</b></span>
-            </div>
-            <div class="col-2 d-grid" >
-                <class button type="button" class="btn btn-outline-dark bth-sm btn-block" style="border-radius: 10px; font-size:11px" onclick="window.location.href='/homepage'">View All</button>
+    {{!-- Homepage content --}}
+    <div class="row" style="padding-top: 10px">
+        <div class="row col-6 justify-content-center">
+            <div class="col-11">
+                <table class ="table table-light table-hover">
+                    <thread>
+                        <tr>
+                            <th scope="col" style="width: 67%"> <b style="font-size:larger;">Recent access</b> </th>
+                            <th scope="col justify-content-left" style="width: 33%"> <button type="button" class="btn btn-primary btn-block btn-sm" style="border-radius: 10px" onclick="window.location.href='/passman'">View all</button></th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        {{#each items}}
+                            <tr>
+                                <td>{{title}}</td>
+                                <td>{{date}}</td>
+                            </tr>
+                        {{/each}}
+                        <tr>
+                            <td>facebook.com</td>
+                            <td>02/09/1945</td>
+                        </tr>
+                        <tr>
+                            <td>gmail.com</td>
+                            <td>02/09/1945</td>
+                        </tr>                    <tr>
+                            <td>instagram.com</td>
+                            <td>02/09/1945</td>
+                        </tr>                    <tr>
+                            <td>x.com</td>
+                            <td>02/09/1945</td>
+                        </tr>                    <tr>
+                            <td>tinder.com</td>
+                            <td>02/09/1945</td>
+                        </tr>                    <tr>
+                            <td>reddit.com</td>
+                            <td>02/09/1945</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="list-group" style"">
-            <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>
-            <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>
-            <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>
-            <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>        <a href="#" class="list-group item list-group-item-action list-group-item-secondary" style="text-decoration: none">
-                <div class="d-flex w-100 justify-content-between ">
-                    <h5 class="mb-1">Password name</h5>
-                    <p class="mb-1">date</p>
-                </div>
-            </a>
+        <div class="row col-6 justify-content-center">
+            <div class="col-11">
+                <table class ="table table-light table-hover">
+                    <thread>
+                        <tr>
+                            <th scope="col" style="width: 67%"> <b style="font-size:larger;">Oldest access</b> </th>
+                            <th scope="col justify-content-left" style="width: 33%"> <button type="button" class="btn btn-primary btn-block btn-sm" style="border-radius: 10px" onclick="window.location.href='/passman'">View all</button></th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        {{#each items}}
+                            <tr>
+                                <td>{{description}}</td>
+                                <td>{{date}}</td>
+                            </tr>
+                        {{/each}}
+                        <tr>
+                            <td>facebook.com</td>
+                            <td>02/09/1945</td>
+                        </tr>
+                        <tr>
+                            <td>gmail.com</td>
+                            <td>02/09/1945</td>
+                        </tr>                    <tr>
+                            <td>instagram.com</td>
+                            <td>02/09/1945</td>
+                        </tr>                    <tr>
+                            <td>x.com</td>
+                            <td>02/09/1945</td>
+                        </tr>                    <tr>
+                            <td>tinder.com</td>
+                            <td>02/09/1945</td>
+                        </tr>                    <tr>
+                            <td>reddit.com</td>
+                            <td>02/09/1945</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        
     </div>
 </div>
