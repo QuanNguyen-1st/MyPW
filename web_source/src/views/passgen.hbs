@@ -35,7 +35,7 @@
 
     <div class="row justify-content-center" style="padding-top: 20px;">
         <div class="col-11 collapse form-gen show" id="form1" style="padding: 20px;">
-            <from>
+            <form action="/passgen/generate" method="POST">
                 <div class="form-header">
                     <h3>Basic Generator</h3>
                 </div>
@@ -55,7 +55,7 @@
                         <div class="input-group">
                             <div class="input-group-text gap-2 input-style" style="width: 100%; background-color:rgb(212, 224, 235)">
                                 <input class="form-check-input input-style" type="checkbox" checked onchange="disableDigit()" id="digitCheck">
-                                <input type="text" class="form-control input-style" aria-describedby="digits" id="IncludedDigits" value="0123456789">
+                                <input type="text" class="form-control input-style" aria-describedby="digits" id="IncludedDigits" value="0123456789" name="digits">
                             </div>
                         </div>
                         <div id="digits" class="form-text">Digits to be included in the password</div>
@@ -66,20 +66,16 @@
                         <div class="input-group">
                             <div class="input-group-text gap-2 input-style" style="width: 100%; background-color:rgb(212, 224, 235)">
                                 <input class="form-check-input input-style" type="checkbox" checked onchange="disableSpecial()" id="specialCheck">
-                                <input type="text" class="form-control input-style" aria-describedby="digits" id="IncludedSpecials" value="@!#$%^&*()-=+?">
+                                <input type="text" class="form-control input-style" aria-describedby="digits" id="IncludedSpecials" value="@!#$%^&*()-=+?" name="specialChars">
                             </div>
                         </div>
                         <div id="special" class="form-text">Special characters to be included in the password</div>
                     </div>
                 </div>
                 <div class="row justify-content-end" style="padding:5px">
-                    {{!-- <button class="col-3 btn btn-primary" type="submit" onclick="window.alert('Stupid Hooman')" style=""> Generate </button>   --}}
-                    {{!-- <button class="col-3 btn btn-primary" type="submit" style="" > Generate </button> --}}
-                    <form action="/passgen/generate" method="POST">
-                        <div class="row justify-content-end" style="padding:5px">
-                            <button class="col-3 btn btn-primary" type="submit" style=""> Generate </button>
-                        </div>
-                    </form>
+                    <div class="row justify-content-end" style="padding:5px">
+                        <button class="col-3 btn btn-primary" type="submit" style=""> Generate </button>
+                    </div>
             <form/>
         </div>  
     <div/>

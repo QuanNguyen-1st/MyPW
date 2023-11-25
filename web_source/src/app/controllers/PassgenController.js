@@ -1,8 +1,8 @@
-function generatePassword(length = 14, includeDigits = true, includeSpecialChars = true) {
+function generatePassword(length = 14, digits = '', specialChars ='') {
     const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
     const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const digits = includeDigits ? '0123456789' : '';
-    const specialChars = includeSpecialChars ? '!@#$%^&*()-=_+[]{}|;:,.<>?' : '';
+    // const digits = includeDigits ? '0123456789' : '';
+    // const specialChars = includeSpecialChars ? '!@#$%^&*()-=_+[]{}|;:,.<>?' : '';
     const Letter = lowercaseLetters + uppercaseLetters;
     const characters = Letter + digits + specialChars;
     if (length < 8 || length >= 33) {
@@ -34,9 +34,10 @@ class PassgenController {
     // [POST] /generate
     async generate(req, res, next) {
         const length = req.body.length;
-        const includeDigits = req.body.includeDigits;
-        const includeSpecialChars = req.body.includeSpecialChars;
-        const password = generatePassword(length, includeDigits, includeSpecialChars);
+        // console.alert(req.body)
+        const digits = req.body.digits;
+        const specialChars = req.body.specialChars;
+        const password = generatePassword(length, digits, specialChars);
         req.session.password = password;
         res.redirect('/passgen');
     }
