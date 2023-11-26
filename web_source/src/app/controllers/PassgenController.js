@@ -37,7 +37,7 @@ class PassgenController {
         // console.alert(req.body)
         const digits = req.body.digits;
         const specialChars = req.body.specialChars;
-        const password = generatePassword(length, digits, specialChars);
+        const password = await generatePassword(length, digits, specialChars);
         req.session.password = password;
         res.redirect('/passgen');
     }
@@ -45,4 +45,4 @@ class PassgenController {
 
 
 
-module.exports = new PassgenController;
+module.exports = new PassgenController; 
