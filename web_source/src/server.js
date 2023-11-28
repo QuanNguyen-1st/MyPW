@@ -1,6 +1,8 @@
 const express = require('express')
+const sql = require('mssql/msnodesqlv8');
 const path = require('path');
 const bodyParse = require('body-parser');
+const methodOverride = require('method-override');
 const exphbs = require('express-handlebars'); 
 const session = require('express-session')
 const app = express()
@@ -31,5 +33,13 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 route(app);
+
+process.on('SIGINT', () => {
+    sql.close().then(() => {
+      console.log('Connection closed.');
+      process.exit();
+    });
+  });
+  
 
 app.listen(port, () => console.log(`App listening on port ${port}`))

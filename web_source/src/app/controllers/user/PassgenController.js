@@ -20,13 +20,13 @@ class PassgenController {
     // [GET] /
     index(req, res, next) {
         if(req.session.password) {
-            res.render('passgen', {
+            res.render('user/passgen', {
                 passgenActive: true,
                 password: req.session.password
             });
         }
         else{
-            res.render('passgen', {
+            res.render('user/passgen', {
             passgenActive: true
             });
         }

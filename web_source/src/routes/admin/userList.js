@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const adminUserListController = require('../app/controllers/AdminUserListController');
+const adminUserListController = require('../../app/controllers/admin/UserListController');
 
 router.get('/', adminUserListController.index);
 router.get('/check-user-list', adminUserListController.OpenCheckUserListForm);

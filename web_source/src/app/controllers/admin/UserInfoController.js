@@ -1,7 +1,7 @@
 class AdminUserInfoController {
     // [GET] /
     index(req, res, next) {
-        res.render('userinfo', {
+        res.render('admin/info', {
             layout: 'main-admin',
             userinfoActive: true
         });

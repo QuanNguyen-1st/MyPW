@@ -1,7 +1,7 @@
 class AdminFeedbackController {
     // [GET] /
     index(req, res, next) {
-        res.render('adminFeedback', {
+        res.render('admin/feedback', {
             layout: 'main-admin',
             feedbackActive: true
         });

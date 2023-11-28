@@ -1,7 +1,7 @@
 class AdminPassmanController {
     // [GET] /
     index(req, res, next) {
-        res.render('passman', {
+        res.render('admin/passman', {
             layout: 'main-admin',
             passmanActive: true
         });

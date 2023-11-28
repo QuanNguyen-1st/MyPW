@@ -1,7 +1,7 @@
 class FeedbackController {
     // [GET] /
     index(req, res, next) {
-        res.render('feedback', {
+        res.render('user/feedback', {
             feedbackActive: true
         });
     }

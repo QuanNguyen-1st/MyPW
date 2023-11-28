@@ -1,7 +1,7 @@
 class UserInfoController {
     // [GET] /
     index(req, res, next) {
-        res.render('userinfo', {
+        res.render('user/userinfo', {
             userinfoActive: true
         });
     }

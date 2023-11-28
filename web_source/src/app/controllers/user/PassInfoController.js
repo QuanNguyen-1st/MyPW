@@ -1,7 +1,7 @@
 class PassInfoController {
     // [GET] /
     index(req, res, next) {
-        res.render('passinfo', {
+        res.render('user/passinfo', {
             passmanActive: true
         });
     }
