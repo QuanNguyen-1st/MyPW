@@ -1,6 +1,8 @@
 const express = require('express')
+const sql = require('mssql/msnodesqlv8');
 const path = require('path');
 const bodyParse = require('body-parser');
+const methodOverride = require('method-override');
 const exphbs = require('express-handlebars'); 
 const nodemailer = require('nodemailer');
 
@@ -83,5 +85,13 @@ async function sendEmail(to, text) {
 
 
 route(app);
+
+process.on('SIGINT', () => {
+    sql.close().then(() => {
+      console.log('Connection closed.');
+      process.exit();
+    });
+  });
+  
 
 app.listen(port, () => console.log(`App listening on port ${port}`))

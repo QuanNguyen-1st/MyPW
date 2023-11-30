@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="/css/passman.css">
+<div class="container">
+    <div class="passman-title">
+        Password Manager
+    </div>
+    <div class="tools">
+        <div class="search-bar">
+            <input type="text" name="search" id="search-text" placeholder="Search">
+            <img src="/img/search.png" alt="search icon">
+        </div>
+        <div class="button-container">
+            <button class="export-btn">EXPORT</button>
+            <button class="create-btn">CREATE</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <table class="password-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">STT</th>
+                    <th style="width: 20%;">Mật khẩu</th>
+                    <th style="width: 20%;">Ngày tạo</th>
+                    <th style="width: 20%;">Thời gian</th>
+                    <th style="width: 5%;">Active</th>
+                    <th style="width: 15%;">Action</th>
+                    <th style="width: 15%;">Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{!-- <tr>
+                    <td>1</td>
+                    <td>hallo</td>
+                    <td>20/11/2003</td>
+                    <td>07:00:00</td>
+                    <td> <input type="checkbox"></td>
+                    <td> 
+                        <button class="edit-btn"></button>
+                        <button class="delete-btn"></button>
+                    </td>
+                    <td><button>Detail</button></td>
+                </tr>
+                --}}
+            </tbody>
+
+        </table>
+    </div>
+    <div class="select-container">
+        <div class="select-bar">
+            <button class="pre-btn"> &lt; </button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button class="next-btn"> &gt;</button>
+        </div>
+    </div>
+</div>
+
+{{!-- Main script --}}
+<script>
+const tableBody = document.querySelector('.password-table tbody'); // Get Table <tbody> DOM
+// Example data
+passList = [
+    {id: "1", pass:"hallo", date:"20/11/2003", time:"07:00:00", active: true},
+    {id: "2", pass:"deadline", date:"20/01/2003", time:"08:00:00",active: false},
+    {id: "3", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
+]
+
+// Get Password List
+function getPassList(){
+    return passList;
+}
+
+//  Handle DetailButton onClick
+function handleDetailBtnClick(id){
+    // Set Cookie openPasswordID to passinfo
+    document.cookie = "openPasswordID="+id;
+    // Go to PassInfo
+    window.location.assign("/passinfo");
+}
+
+// Display all password in table
+function displayPasswordTable(){
+    passList = getPassList();
+    passList.forEach(function(pass){
+        const tableHolder = `
+                <td>${pass['id']}</td>
+                <td>${pass['pass']}</td>
+                <td>${pass['date']}</td>
+                <td>${pass['time']}</td>
+                <td> <input type="checkbox" onclick="return false;" ${pass['active']?"checked":""}></td>
+                <td> 
+                    <button class="edit-btn"></button>
+                    <button class="delete-btn"></button>
+                </td>
+                <td><button onclick="handleDetailBtnClick(${pass['id']})">Detail</button></td>
+        `;
+        //console.log(tableHolder);
+        tableBody.innerHTML += tableHolder;
+    });
+}
+
+// __main__
+displayPasswordTable();
+
+</script>
