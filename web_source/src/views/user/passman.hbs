@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                {{!-- <tr>
                     <td>1</td>
                     <td>hallo</td>
                     <td>20/11/2003</td>
@@ -39,42 +39,7 @@
                     </td>
                     <td><button>Detail</button></td>
                 </tr>
-                                <tr>
-                    <td>1</td>
-                    <td>hallo</td>
-                    <td>20/11/2003</td>
-                    <td>07:00:00</td>
-                    <td> <input type="checkbox"></td>
-                    <td> 
-                        <button class="edit-btn"></button>
-                        <button class="delete-btn"></button>
-                    </td>
-                    <td><button>Detail</button></td>
-                </tr>
-                                <tr>
-                    <td>1</td>
-                    <td>hallo</td>
-                    <td>20/11/2003</td>
-                    <td>07:00:00</td>
-                    <td> <input type="checkbox"></td>
-                    <td>
-                        <button class="edit-btn"></button>
-                        <button class="delete-btn"></button>    
-                     </td>
-                    <td><button>Detail</button></td>
-                </tr>
-                                <tr>
-                    <td>1</td>
-                    <td>hallo</td>
-                    <td>20/11/2003</td>
-                    <td>07:00:00</td>
-                    <td> <input type="checkbox"></td>
-                    <td> 
-                        <button class="edit-btn"></button>
-                        <button class="delete-btn"></button>
-                    </td>
-                    <td><button>Detail</button></td>
-                </tr>
+                --}}
             </tbody>
 
         </table>
@@ -89,3 +54,52 @@
         </div>
     </div>
 </div>
+
+{{!-- Main script --}}
+<script>
+const tableBody = document.querySelector('.password-table tbody'); // Get Table <tbody> DOM
+// Example data
+passList = [
+    {id: "1", pass:"hallo", date:"20/11/2003", time:"07:00:00", active: true},
+    {id: "2", pass:"deadline", date:"20/01/2003", time:"08:00:00",active: false},
+    {id: "3", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
+]
+
+// Get Password List
+function getPassList(){
+    return passList;
+}
+
+//  Handle DetailButton onClick
+function handleDetailBtnClick(id){
+    // Set Cookie openPasswordID to passinfo
+    document.cookie = "openPasswordID="+id;
+    // Go to PassInfo
+    window.location.assign("/passinfo");
+}
+
+// Display all password in table
+function displayPasswordTable(){
+    passList = getPassList();
+    passList.forEach(function(pass){
+        const tableHolder = `
+                <td>${pass['id']}</td>
+                <td>${pass['pass']}</td>
+                <td>${pass['date']}</td>
+                <td>${pass['time']}</td>
+                <td> <input type="checkbox" onclick="return false;" ${pass['active']?"checked":""}></td>
+                <td> 
+                    <button class="edit-btn"></button>
+                    <button class="delete-btn"></button>
+                </td>
+                <td><button onclick="handleDetailBtnClick(${pass['id']})">Detail</button></td>
+        `;
+        //console.log(tableHolder);
+        tableBody.innerHTML += tableHolder;
+    });
+}
+
+// __main__
+displayPasswordTable();
+
+</script>

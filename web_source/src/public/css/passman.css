@@ -83,7 +83,11 @@
 
 .password-table{
     width: 100%;
-    height: 70%;
+    /* height: 70%; */
+}
+
+.password-table tbody >tr {
+    height: 45px;
 }
 
 .password-table th{
