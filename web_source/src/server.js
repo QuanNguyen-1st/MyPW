@@ -1,3 +1,7 @@
+const db = require('./config/db');
+
+db.connect();
+
 const express = require('express')
 const sql = require('mssql/msnodesqlv8');
 const path = require('path');
@@ -42,4 +46,4 @@ process.on('SIGINT', () => {
   });
   
 
-app.listen(port, () => console.log(`App listening on port ${port}`))
+app.listen(port, () => console.log(`App listening on port ${port}`));
