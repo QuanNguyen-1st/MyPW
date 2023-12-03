@@ -1,8 +1,8 @@
-INSERT INTO ACCOUNT (accountName, accountPassword)
+INSERT INTO ACCOUNT (accountName, accountPassword, isAdmin)
 VALUES 
-    ('user1', 'password123'),
-    ('user2', 'securePass567'),
-    ('user3', 'qwerty789');
+    ('user1', 'password123', '1'),
+    ('user2', 'securePass567', '0'),
+    ('user3', 'qwerty789', '0');
 
 INSERT INTO PASSLIST (accountName, webName, password)
 VALUES 

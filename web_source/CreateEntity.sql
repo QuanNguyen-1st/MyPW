@@ -2,7 +2,8 @@ USE mypw
 
 CREATE TABLE ACCOUNT (
     accountName VARCHAR(255) PRIMARY KEY NOT NULL,
-    accountPassword VARCHAR(255) NOT NULL
+    accountPassword VARCHAR(255) NOT NULL,
+    isAdmin BIT NOT NULL
 );
 
 
