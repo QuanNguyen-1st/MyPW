@@ -1,5 +1,5 @@
-// const pool = require('./config/db');
-import pool from './config/db';
+const pool = require('./config/db');
+
 const express = require('express')
 const sql = require('mssql/msnodesqlv8');
 const path = require('path');
