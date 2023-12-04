@@ -1,5 +1,5 @@
 # Set up
-1. Install các module (và nên sử dụng node các phiên bản 16.0 || 18.0 || 20.0 
+1. Install các module (và nên sử dụng node các phiên bản 16.0 || 18.0 || 20.0)
 ```bash
 npm install express 
 npm install mssql msnodesqlv8 
