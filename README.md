@@ -10,7 +10,7 @@ npm install express-handlebars
 npm install express-session
 npm install dotenv
 ```
-2. Tải SQL Server & SQL Server Management Studio (SSMS).
+2. Tải SQL Server ([here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)) & SQL Server Management Studio (SSMS) ([here](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)).
 3. Ghi nhớ dòng MSSQLSERVER. !important
 4. Dùng SSMS connect vào SQL Server local.
 5. Chạy các queries trong SSMS theo thứ tự CreateDB CreateEntity CreateFakeData.
