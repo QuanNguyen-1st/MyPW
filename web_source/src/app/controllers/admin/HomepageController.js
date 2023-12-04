@@ -13,7 +13,7 @@ class AdminHomepageController {
         res.redirect('/login');
     }
 
-    async tpest(req, res, next) {
+    async test(req, res, next) {
         console.log(await account.getExampleData());
         res.render('admin/homepage', {
             layout: 'main-admin',

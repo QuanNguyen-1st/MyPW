@@ -1,7 +1,13 @@
+if (process.env.NODE_ENV != 'production') {
+    require('dotenv').config()
+}
+
 const sql = require('mssql/msnodesqlv8');
+const db_server = process.env.DB_SERVER;
+const db_name = process.env.DB_NAME;
 
 const config = {
-    connectionString: 'Server=localhost;Database=mypw;Trusted_Connection=yes;Driver={SQL Server};',
+    connectionString: `Server=${db_server};Database=${db_name};Trusted_Connection=yes;Driver={SQL Server};`,
 };
 
 const pool = new sql.ConnectionPool(config);
