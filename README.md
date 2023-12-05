@@ -14,8 +14,11 @@ npm install dotenv
 3. Ghi nhớ dòng MSSQLSERVER khi install xog SQL Server. !important
 4. Dùng SSMS connect vào SQL Server local.
 5. Chạy các queries trong SSMS theo thứ tự CreateDB CreateEntity CreateFakeData.
-6. Đổi tên DB_SERVER và DB_NAME trong .env
-
+6. Tạo file tên .env trong thư mục web_source với 2 biến (thay Server thành tên server local).
+```bash
+DB_SERVER=Server
+DB_NAME=mypw
+```
 # Debug
 1. Chuyển thư mục root thành web_source. 
 ```bash
