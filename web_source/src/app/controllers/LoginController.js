@@ -20,7 +20,7 @@ class LoginController {
             }
             accountModel.findUsername(username)
                 .then((result) => {
-                    // console.log(result[0]);
+                    // console.log(result);
                     if (result && result[0].accountPassword === password) {
                         if (result[0].isAdmin === false) {
                             return res.redirect('homepage');
