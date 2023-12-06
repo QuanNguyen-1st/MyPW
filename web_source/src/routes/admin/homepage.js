@@ -5,6 +5,5 @@ const adminHomepageController = require('../../app/controllers/admin/HomepageCon
 
 router.get('/', adminHomepageController.login);
 router.get('/homepage', adminHomepageController.index);
-router.get('/test', adminHomepageController.test);
 
 module.exports = router;

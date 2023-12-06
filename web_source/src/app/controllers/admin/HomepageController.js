@@ -1,8 +1,9 @@
-const account = require('../../models/account');
+const accountModel = require('../../models/account');
 
 class AdminHomepageController {
     // [GET] /
-    index(req, res, next) {
+    async index(req, res, next) {
+        var allUsers = await accountModel.getUsername();
         res.render('admin/homepage', {
             layout: 'main-admin',
             homepageActive: true
@@ -13,13 +14,6 @@ class AdminHomepageController {
         res.redirect('/login');
     }
 
-    async test(req, res, next) {
-        console.log(await account.getExampleData());
-        res.render('admin/homepage', {
-            layout: 'main-admin',
-            homepageActive: true
-        });
-    }
 }
 
 module.exports = new AdminHomepageController;
