@@ -6,20 +6,25 @@ class AdminUserListController {
             userlistActive: true
         });
     }
-    // [GET] /"check-user-list"
-    OpenCheckUserListForm(req, res, next) {
+    
+    // [GET] /check-user-list
+    openCheckUserListForm(req, res, next) {
         res.render('admin/checkuserlist', {
             layout: 'main-admin',
             userlistActive: true
         });
     }
-    OpenCheckUserInfoForm(req, res, next) {
+    
+    // [GET] /check-user-info
+    openCheckUserInfoForm(req, res, next) {
         res.render('admin/checkuserinfo', {
             layout: 'main-admin',
             userlistActive: true
         });
     }
-    OpenCheckFrequenceForm(req, res, next) {
+    
+    // [GET] /check-frequence
+    openCheckFrequenceForm(req, res, next) {
         res.render('admin/checkfrequence', {
             layout: 'main-admin',
             userlistActive: true

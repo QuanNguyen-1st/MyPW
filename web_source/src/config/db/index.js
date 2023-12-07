@@ -10,9 +10,9 @@ const config = {
     connectionString: `Server=${db_server};Database=${db_name};Trusted_Connection=yes;Driver={SQL Server};`,
 };
 
-const pool = new sql.ConnectionPool(config);
+const poolPromise = new sql.ConnectionPool(config);
 
-pool.connect()
+poolPromise.connect()
     .then(() => {
         console.log('Connected to the database');
     })
@@ -20,4 +20,4 @@ pool.connect()
         console.error('Database connection error:', err);
     });
 
-module.exports = pool;
+module.exports = { poolPromise, sql };
