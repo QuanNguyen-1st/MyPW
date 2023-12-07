@@ -1,3 +1,5 @@
+USE mypw
+GO
 INSERT INTO ACCOUNT (accountName, accountPassword, isAdmin)
 VALUES 
     ('user1', 'password123', '1'),
