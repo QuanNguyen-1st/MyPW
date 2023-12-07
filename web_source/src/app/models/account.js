@@ -4,7 +4,7 @@ const { poolPromise, sql } = require('../../config/db');
 class AccountModel {
     async findUsername(username) {
         try {
-            const queryString = 'SELECT TOP 1 * FROM ACCOUNT WHERE accountName = @username';
+            const queryString = 'SELECT TOP 1 * FROM ACCOUNT WHERE username = @username';
             
             const pool = await poolPromise;
             const result = await pool.request()
@@ -25,7 +25,7 @@ class AccountModel {
     async getUsername() {
         try {
             const pool = await poolPromise;
-            const result = await pool.request().query('SELECT accountName FROM ACCOUNT');
+            const result = await pool.request().query('SELECT username FROM ACCOUNT');
     
             return result.recordset;
         } catch (err) {

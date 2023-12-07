@@ -6,7 +6,8 @@ class AdminHomepageController {
         var allUsers = await accountModel.getUsername();
         res.render('admin/homepage', {
             layout: 'main-admin',
-            homepageActive: true
+            homepageActive: true,
+            user_list: JSON.stringify(allUsers)
         });
     }
 

@@ -1,7 +1,7 @@
-const pool = require('./config/db');
+const { poolPromise, sql } = require('./config/db');
 
 const express = require('express')
-const sql = require('mssql/msnodesqlv8');
+
 const path = require('path');
 const bodyParse = require('body-parser');
 const methodOverride = require('method-override');
