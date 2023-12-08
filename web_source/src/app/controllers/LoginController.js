@@ -1,4 +1,5 @@
 const accountModel = require('../models/account');
+const isAuthenticated = require('../../middlewares/session');
 
 class LoginController {
     // [GET] /
@@ -22,10 +23,15 @@ class LoginController {
                 .then((result) => {
                     // console.log(result);
                     if (result && result[0].password === password) {
+                        const user = { username: username};
                         if (result[0].isAdmin === false) {
+                            req.session.user = user;
+                            req.session.user.role = 'user';
                             return res.redirect('homepage');
                         }
                         else {
+                            req.session.user = user;
+                            req.session.user.role = 'admin';
                             return res.redirect('admin/homepage');
                         }  
                     }

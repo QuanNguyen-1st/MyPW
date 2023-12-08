@@ -6,9 +6,9 @@ const path = require('path');
 const bodyParse = require('body-parser');
 const methodOverride = require('method-override');
 const exphbs = require('express-handlebars'); 
-const session = require('express-session')
-const app = express()
-const port = 3000
+const session = require('express-session');
+const app = express();
+const port = 3000;
 
 const route = require('./routes');
 
