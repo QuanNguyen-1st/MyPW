@@ -1,18 +1,16 @@
-const db = require('./config/db');
-
-db.connect();
+const { poolPromise, sql } = require('./config/db');
 
 const express = require('express')
-const sql = require('mssql/msnodesqlv8');
+
 const path = require('path');
 const bodyParse = require('body-parser');
 const methodOverride = require('method-override');
 const exphbs = require('express-handlebars'); 
 const nodemailer = require('nodemailer');
 
-const session = require('express-session')
-const app = express()
-const port = 3000
+const session = require('express-session');
+const app = express();
+const port = 3000;
 
 const route = require('./routes');
 
