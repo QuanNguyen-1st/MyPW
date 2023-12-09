@@ -1,4 +1,4 @@
-function generatePassword(length = 14, digits = '', specialChars ='') {
+async function generatePassword(length = 14, digits = '', specialChars ='') {
     const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
     const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     // const digits = includeDigits ? '0123456789' : '';
