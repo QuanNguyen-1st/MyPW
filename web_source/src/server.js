@@ -85,6 +85,19 @@ async function sendEmail(to, text) {
     return transporter.sendMail(mailOptions);
 }
 
+// app.get('/admin/feedback', async (req, res) => {
+//     try {
+//         const result = await poolPromise.query('SELECT * FROM FEEDBACK');
+//         const preparedFeedbackItems = result.recordset.map(item => {
+//             item.stars = Array.from({ length: 5 }, (_, index) => index < item.star);
+//             return item;
+//         });
+//         res.render('admin/feedback', { feedbackItems: preparedFeedbackItems });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
 route(app);
 
