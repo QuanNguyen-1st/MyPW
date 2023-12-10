@@ -8,11 +8,14 @@
 }
 
 .form-head{
-  background-color: #0D99FFB2;
+  background-color: #009EE2;
   border-radius: 10px;
   border-color: rgb(27, 221, 251);
 }
-
+.btn-primary{
+  border-radius: 15px;
+  background-color:  #009EE2;
+}
 .passgen-title{
     width: 456px;
     height: 60px;
@@ -46,7 +49,7 @@
 }
 
 .result-head{
-    background-color: #0D99FFB2;
+    background-color: #009EE2;
     border-radius: 10px;
     border-color: rgb(27, 221, 251);
 }

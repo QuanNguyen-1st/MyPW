@@ -1,0 +1,1 @@
+const analyze = require('../../api/analyzer');
