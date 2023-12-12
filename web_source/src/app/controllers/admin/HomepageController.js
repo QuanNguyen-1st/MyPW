@@ -1,4 +1,3 @@
-const accountModel = require('../../models/account');
 const userModel = require('../../models/user');
 
 const formatDateTime = (date) => {

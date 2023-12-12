@@ -1,5 +1,4 @@
 const accountModel = require('../models/account');
-const isAuthenticated = require('../../middlewares/session');
 
 class LoginController {
     // [GET] /
