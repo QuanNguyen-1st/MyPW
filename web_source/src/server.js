@@ -20,6 +20,8 @@ app.use(bodyParse.urlencoded({
     extended: true
 }));
 
+app.use(methodOverride('_method'));
+
 const hbsHelpers = exphbs.create({
     helpers: require("./helpers/handlebars.js").helpers,
     extname: '.hbs'
@@ -29,8 +31,8 @@ app.use(
         secret: 'HCMUTN3V3RD13',
         resave: false,
         saveUninitialized: false,
-  }));
-  
+}));
+
 app.engine('hbs', hbsHelpers.engine);
 
 app.set('view engine', 'hbs');
@@ -103,10 +105,10 @@ route(app);
 
 process.on('SIGINT', () => {
     sql.close().then(() => {
-      console.log('Connection closed.');
-      process.exit();
+        console.log('Connection closed.');
+        process.exit();
     });
-  });
+});
   
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
