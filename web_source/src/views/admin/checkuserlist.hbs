@@ -180,7 +180,7 @@
 
     .user-list-container__list {
         width: 100%;
-        height: 80%;
+        height: 75%;
     }
 
     .user-list-back-button {
@@ -298,33 +298,32 @@
         <div class="user-list-container__header__left">
             <h1 style="font-size: 24px; margin-left:15px;">Check user list:</h1>
             <div class="user-list-container__header__filter-item">
-                <h5 style="position: absolute; background-color: white; font-size: 14px; padding: 2px; top: -10px; left: 10px; color: #33A0F2; text-align: left" ;>From</h5>
+                <h5 style="position: absolute; background-color: white; font-size: 14px; padding: 2px; top: -10px; left: 10px; color: #33A0F2; text-align: left;">From</h5>
                 <input class="user-list-container__header__filter-item__input" type="text"><br>
                 <p style="left:0; font-size: 14px; color: #777; font-weight: 400">DD/MM/YYYY</p>
             </div>
             <div class="user-list-container__header__filter-item">
-                <h5 style="position: absolute; background-color: white; font-size: 14px; padding: 2px; top: -10px; left: 10px; color: #33A0F2; text-align: left" ;>To</h5>
+                <h5 style="position: absolute; background-color: white; font-size: 14px; padding: 2px; top: -10px; left: 10px; color: #33A0F2; text-align: left;">To</h5>
                 <input class="user-list-container__header__filter-item__input" type="text"><br>
                 <p style="left:0; font-size: 14px; color: #777; font-weight: 400">DD/MM/YYYY</p>
             </div>
             <div class="user-list-container__header__filter-item">
-                <h5 style="position: absolute; background-color: white; font-size: 14px; padding: 2px; top: -10px; left: 10px; color: #33A0F2; text-align: left" ;>User name</h5>
+                <h5 style="position: absolute; background-color: white; font-size: 14px; padding: 2px; top: -10px; left: 10px; color: #33A0F2; text-align: left;">Name</h5>
                 <input class="user-list-container__header__filter-item__input" type="text"><br>
-                <p style="left:0; font-size: 14px; color: #777; font-weight: 400">DD/MM/YYYY</p>
+                {{!-- <p style="left:0; font-size: 14px; color: #777; font-weight: 400">DD/MM/YYYY</p> --}}
             </div>
         </div>
         <div class="user-list-container__header__right">
-            <a href="/user-list">
+            <a href="/admin/user-list">
                 <button type="button" class="user-list-back-button" onclick="">
-                    <p style=" font-size: 24px; color: white; font-weight: 600;">Back</p>
+                    <p style=" font-size: 24px; color: white; font-weight: 600; margin:0;">Back</p>
                 </button>
             </a>
         </div>
     </div>
     <div class="user-list-container__info-header">
         <h5 style="flex:0.9">ID</h5>
-        <h5 style="flex:1">Avatar</h5>
-        <h5 style="flex:2.5">User name</h5>
+        <h5 style="flex:2.5">Full Name</h5>
         <h5 style="flex:1.6">First access</h5>
         <h5 style="flex:1.6">Last access</h5>
         <h5 style="flex:0.8">Total access</h5>
@@ -334,24 +333,88 @@
     <div class="user-list-container__list">
         <div class="scrollable-container">
             <div class="scrollable-content">
-                <!-- Các mục bạn muốn hiển thị và cuộn -->
                 <div class=" = user-list__item">
                     <h5 style="flex:0.9;">1</h5>
-                    <img style="flex:1; height:100%; background-color:aquamarine" src="" />
                     <div class="user-list__item__name-box">Nguyễn Văn A</div>
                     <h5 style="flex:1.6">1/1/1111</h5>
                     <h5 style="flex:1.6">1/1/1111</h5>
                     <h5 style="flex:0.8">69</h5>
                     <h5 style="flex:0.8; color: lawngreen">ON</h5>
                     <div class="user-list__item__view-btn-contain">
-                        <a href="/user-list/check-user-info">
+                        <a href="/admin/user-list/check-user-info">
                             <div class="user-list__item__view-btn">View</div>
                         </a>
                     </div>
                 </div>
                 <div class=" = user-list__item">
                     <h5 style="flex:0.9;">1</h5>
-                    <img style="flex:1; height:100%; background-color:aquamarine" src="" />
+                    <div class="user-list__item__name-box">Nguyễn Văn A</div>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:0.8">69</h5>
+                    <h5 style="flex:0.8; color: lawngreen">ON</h5>
+                    <div class="user-list__item__view-btn-contain">
+                        <a href="/admin/user-list/check-user-info">
+                            <div class="user-list__item__view-btn">View</div>
+                        </a>
+                    </div>
+                </div>
+                <div class=" = user-list__item">
+                    <h5 style="flex:0.9;">1</h5>
+                    <div class="user-list__item__name-box">Nguyễn Văn A</div>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:0.8">69</h5>
+                    <h5 style="flex:0.8; color: lawngreen">ON</h5>
+                    <div class="user-list__item__view-btn-contain">
+                        <a href="/admin/user-list/check-user-info">
+                            <div class="user-list__item__view-btn">View</div>
+                        </a>
+                    </div>
+                </div>
+                <div class=" = user-list__item">
+                    <h5 style="flex:0.9;">1</h5>
+                    <div class="user-list__item__name-box">Nguyễn Văn A</div>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:0.8">69</h5>
+                    <h5 style="flex:0.8; color: lawngreen">ON</h5>
+                    <div class="user-list__item__view-btn-contain">
+                        <a href="/admin/user-list/check-user-info">
+                            <div class="user-list__item__view-btn">View</div>
+                        </a>
+                    </div>
+                </div>
+                <div class=" = user-list__item">
+                    <h5 style="flex:0.9;">1</h5>
+                    <div class="user-list__item__name-box">Nguyễn Văn A</div>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:0.8">69</h5>
+                    <h5 style="flex:0.8; color: lawngreen">ON</h5>
+                    <div class="user-list__item__view-btn-contain">
+                        <a href="/admin/user-list/check-user-info">
+                            <div class="user-list__item__view-btn">View</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Các mục bạn muốn hiển thị và cuộn -->
+                <div class=" = user-list__item">
+                    <h5 style="flex:0.9;">1</h5>
+                    <div class="user-list__item__name-box">Nguyễn Văn A</div>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:1.6">1/1/1111</h5>
+                    <h5 style="flex:0.8">69</h5>
+                    <h5 style="flex:0.8; color: lawngreen">ON</h5>
+                    <div class="user-list__item__view-btn-contain">
+                        <a href="/admin/user-list/check-user-info">
+                            <div class="user-list__item__view-btn">View</div>
+                        </a>
+                    </div>
+                </div>
+                <div class=" = user-list__item">
+                    <h5 style="flex:0.9;">1</h5>
                     <div class="user-list__item__name-box">Nguyễn Văn A</div>
                     <h5 style="flex:1.6">1/1/1111</h5>
                     <h5 style="flex:1.6">1/1/1111</h5>
@@ -363,7 +426,6 @@
                 </div>
                 <div class=" = user-list__item">
                     <h5 style="flex:0.9;">1</h5>
-                    <img style="flex:1; height:100%; background-color:aquamarine" src="" />
                     <div class="user-list__item__name-box">Nguyễn Văn A</div>
                     <h5 style="flex:1.6">1/1/1111</h5>
                     <h5 style="flex:1.6">1/1/1111</h5>
@@ -375,7 +437,6 @@
                 </div>
                 <div class=" = user-list__item">
                     <h5 style="flex:0.9;">1</h5>
-                    <img style="flex:1; height:100%; background-color:aquamarine" src="" />
                     <div class="user-list__item__name-box">Nguyễn Văn A</div>
                     <h5 style="flex:1.6">1/1/1111</h5>
                     <h5 style="flex:1.6">1/1/1111</h5>
@@ -387,7 +448,6 @@
                 </div>
                 <div class=" = user-list__item">
                     <h5 style="flex:0.9;">1</h5>
-                    <img style="flex:1; height:100%; background-color:aquamarine" src="" />
                     <div class="user-list__item__name-box">Nguyễn Văn A</div>
                     <h5 style="flex:1.6">1/1/1111</h5>
                     <h5 style="flex:1.6">1/1/1111</h5>
@@ -399,7 +459,6 @@
                 </div>
                 <div class=" = user-list__item">
                     <h5 style="flex:0.9;">1</h5>
-                    <img style="flex:1; height:100%; background-color:aquamarine" src="" />
                     <div class="user-list__item__name-box">Nguyễn Văn A</div>
                     <h5 style="flex:1.6">1/1/1111</h5>
                     <h5 style="flex:1.6">1/1/1111</h5>
@@ -409,31 +468,6 @@
                         <div class="user-list__item__view-btn">View</div>
                     </div>
                 </div>
-                <div class=" = user-list__item">
-                    <h5 style="flex:0.9;">1</h5>
-                    <img style="flex:1; height:100%; background-color:aquamarine" src="" />
-                    <div class="user-list__item__name-box">Nguyễn Văn A</div>
-                    <h5 style="flex:1.6">1/1/1111</h5>
-                    <h5 style="flex:1.6">1/1/1111</h5>
-                    <h5 style="flex:0.8">69</h5>
-                    <h5 style="flex:0.8; color: lawngreen">ON</h5>
-                    <div class="user-list__item__view-btn-contain">
-                        <div class="user-list__item__view-btn">View</div>
-                    </div>
-                </div>
-                <div class=" = user-list__item">
-                    <h5 style="flex:0.9;">1</h5>
-                    <img style="flex:1; height:100%; background-color:aquamarine" src="" />
-                    <div class="user-list__item__name-box">Nguyễn Văn A</div>
-                    <h5 style="flex:1.6">1/1/1111</h5>
-                    <h5 style="flex:1.6">1/1/1111</h5>
-                    <h5 style="flex:0.8">69</h5>
-                    <h5 style="flex:0.8; color: lawngreen">ON</h5>
-                    <div class="user-list__item__view-btn-contain">
-                        <div class="user-list__item__view-btn">View</div>
-                    </div>
-                </div>
-                <!-- Thêm các mục khác nếu cần -->
             </div>
         </div>
     </div>

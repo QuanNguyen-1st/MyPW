@@ -183,7 +183,8 @@
             </div>
         </form>
     </div>
-    <div class="list-feedback">
+    <div class="list-feedback mt-3">
+        {{#each feedbackItems}}
         <div class="row feedback-item">
             <div class="col-lg-10">
                 <div class="col1-row1-fb row container-fluid">
@@ -191,139 +192,30 @@
                         <img src="https://img.hoidap247.com/picture/question/20210531/large_1622431721191.jpg?v=0" alt="Avatar" class="avatar circle">
                     </div>
                     <div class="col-lg-6">
-                        <p>Nguyen Van A</p>
+                        <p>{{username}}</p>
                     </div>
-                    <div class="date-time-feedback col-lg-3">Time: 16:1, 17/11/2023</div>
+                    <div class="date-time-feedback col-lg-3">{{time}}</div>
                     <div class="fixedStars col-lg-2">
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="unchecked-star">&#9734</div>
+                        {{#each stars}}
+                            {{#if this}}
+                                <div class="checked-star">&#9733</div>
+                            {{else}}
+                                <div class="unchecked-star">&#9734</div>
+                            {{/if}}
+                        {{/each}}
                     </div>
                 </div>
-                <textarea class="feedback-text" id="floatingTextareaDisabled" disabled="disabled">
-                Web ok!!!
+                <textarea class="feedback-text mt-2" id="floatingTextareaDisabled" disabled="disabled">
+                    {{Description}}
                 </textarea>
             </div>
             <div class="col-lg-2">
-                <button type="button" class="view-feedback btn btn-primary" onclick="viewFeedback()">
+            <button type="button" class="view-feedback btn btn-primary" onclick="viewFeedback()">
                 View
-                </button>
+            </button>
             </div>
         </div>
-        <div class="row feedback-item">
-            <div class="col-lg-10">
-                <div class="col1-row1-fb row container-fluid">
-                    <div class="col-lg-1">
-                        <img src="https://img.hoidap247.com/picture/question/20210531/large_1622431721191.jpg?v=0" alt="Avatar" class="avatar circle">
-                    </div>
-                    <div class="col-lg-6">
-                        <p>Nguyen Van A</p>
-                    </div>
-                    <div class="date-time-feedback col-lg-3">Time: 16:1, 17/11/2023</div>
-                    <div class="fixedStars col-lg-2">
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="unchecked-star">&#9734</div>
-                    </div>
-                </div>
-                <textarea class="feedback-text" id="floatingTextareaDisabled" disabled="disabled">
-                Web ok!!!
-                </textarea>
-            </div>
-            <div class="col-lg-2">
-                <button type="button" class="view-feedback btn btn-primary" onclick="viewFeedback()">
-                View
-                </button>
-            </div>
-        </div>
-        <div class="row feedback-item">
-            <div class="col-lg-10">
-                <div class="col1-row1-fb row container-fluid">
-                    <div class="col-lg-1">
-                        <img src="https://img.hoidap247.com/picture/question/20210531/large_1622431721191.jpg?v=0" alt="Avatar" class="avatar circle">
-                    </div>
-                    <div class="col-lg-6">
-                        <p>Nguyen Van A</p>
-                    </div>
-                    <div class="date-time-feedback col-lg-3">Time: 16:1, 17/11/2023</div>
-                    <div class="fixedStars col-lg-2">
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="unchecked-star">&#9734</div>
-                    </div>
-                </div>
-                <textarea class="feedback-text" id="floatingTextareaDisabled" disabled="disabled">
-                Web ok!!!
-                </textarea>
-            </div>
-            <div class="col-lg-2">
-                <button type="button" class="view-feedback btn btn-primary" onclick="viewFeedback()">
-                View
-                </button>
-            </div>
-        </div>
-        <div class="row feedback-item">
-            <div class="col-lg-10">
-                <div class="col1-row1-fb row container-fluid">
-                    <div class="col-lg-1">
-                        <img src="https://img.hoidap247.com/picture/question/20210531/large_1622431721191.jpg?v=0" alt="Avatar" class="avatar circle">
-                    </div>
-                    <div class="col-lg-6">
-                        <p>Nguyen Van A</p>
-                    </div>
-                    <div class="date-time-feedback col-lg-3">Time: 16:1, 17/11/2023</div>
-                    <div class="fixedStars col-lg-2">
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="unchecked-star">&#9734</div>
-                    </div>
-                </div>
-                <textarea class="feedback-text" id="floatingTextareaDisabled" disabled="disabled">
-                Web ok!!!
-                </textarea>
-            </div>
-            <div class="col-lg-2">
-                <button type="button" class="view-feedback btn btn-primary" onclick="viewFeedback()">
-                View
-                </button>
-            </div>
-        </div>
-        <div class="row feedback-item">
-            <div class="col-lg-10">
-                <div class="col1-row1-fb row container-fluid">
-                    <div class="col-lg-1">
-                        <img src="https://img.hoidap247.com/picture/question/20210531/large_1622431721191.jpg?v=0" alt="Avatar" class="avatar circle">
-                    </div>
-                    <div class="col-lg-6">
-                        <p>Nguyen Van A</p>
-                    </div>
-                    <div class="date-time-feedback col-lg-3">Time: 16:1, 17/11/2023</div>
-                    <div class="fixedStars col-lg-2">
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="checked-star">&#9733</div>
-                        <div class="unchecked-star">&#9734</div>
-                    </div>
-                </div>
-                <textarea class="feedback-text" id="floatingTextareaDisabled" disabled="disabled">
-                Web ok!!!
-                </textarea>
-            </div>
-            <div class="col-lg-2">
-                <button type="button" class="view-feedback btn btn-primary" onclick="viewFeedback()">
-                View
-                </button>
-            </div>
-        </div>
+        {{/each}}
         <button type="button" class="more-btn btn btn-primary" onclick="moreFeedback()">
             More feedback
         </button>

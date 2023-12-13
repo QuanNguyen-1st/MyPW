@@ -58,19 +58,15 @@
                 box-shadow: 0px 1.2080078125px 3.6240234375px 0px #0000004D;
                 margin: auto;
             ">
-                <p class="fs-5">Welcome back, Nguyen Van A</p>
+                <p class="fs-5">Welcome back, {{user.firstName}} {{user.lastName}}</p>
             </div>
             <div>
                 <p class="fs-4 text-center" style="color: #808080">
                     <img src="" alt="Avatar" onerror="this.src='/img/img_avatar_male.png';" style="border-radius: 50%; max-height:120px; vertical-align: middle">
-                    Admin ID: 001
+                    Admin ID: {{user.username}}
                 </p>
             </div>
         </div>
-        {{!-- <h1>Lorem Ipsum</h1>
-        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p> --}}
     </div>
 </div>
 <script>
@@ -97,11 +93,11 @@
                             <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
                                 <img src="" alt="Avatar" onerror="this.src='/img/img_avatar_male.png';" style="border-radius: 50%; max-height:35px; margin-right: 20px;">
                                 <div class="left-side" style="display: flex; flex-direction: column;">
-                                    <div>Nguyen Van A</div>
-                                    <div>ID: abc</div>
+                                    <div>${user.firstName} ${user.lastName}</div>
+                                    <div>ID: ${user.username}</div>
                                 </div>
                                 <div class="right-side" style="text-align: right; margin-left: auto;">
-                                    <div>18/11/2023</div>
+                                    <div>${user.lastAccess}</div>
                                 </div>
                             </div>
                         </li>`;

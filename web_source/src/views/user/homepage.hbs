@@ -18,7 +18,7 @@
             <div class="col-11 home-title-card">
                 <div style="padding: 10px;">
                     <div style="padding: 5px; background-color: rgb(243, 238, 246)">
-                        <span> Welcome back! <b>{{username}} NGUYEN VAN A </b></span>
+                        <span> Welcome back! <b>{{user.firstName}} {{user.lastName}}</b></span>
                     </div>
                     <div class="row">
                         <div class="col-6" style="padding: 5px">
@@ -31,7 +31,7 @@
                         <div class="col-6" style="padding: 5px">
                             <center>
                                 <div style="font-size:large;text-align: left; padding-top: 50px">
-                                    <a style="text-decoration: none;" onclick="window.location.href='/userinfo'"> UserID: <b> {{username}} 1234</b> </a> 
+                                    <a style="text-decoration: none;" onclick="window.location.href='/userinfo'"> UserID: <b> {{user.username}} </b> </a> 
                                 </div>
                             </center>
                         </div>
@@ -52,32 +52,12 @@
                         </tr>
                     </thread>
                     <tbody>
-                        {{#each items}}
+                        {{#each passwordItems}}
                             <tr>
-                                <td>{{title}}</td>
-                                <td>{{date}}</td>
+                                <td>{{url}}</td>
+                                <td>{{lastAccessDay}}</td>
                             </tr>
                         {{/each}}
-                        <tr>
-                            <td>facebook.com</td>
-                            <td>02/09/1945</td>
-                        </tr>
-                        <tr>
-                            <td>gmail.com</td>
-                            <td>02/09/1945</td>
-                        </tr>                    <tr>
-                            <td>instagram.com</td>
-                            <td>02/09/1945</td>
-                        </tr>                    <tr>
-                            <td>x.com</td>
-                            <td>02/09/1945</td>
-                        </tr>                    <tr>
-                            <td>tinder.com</td>
-                            <td>02/09/1945</td>
-                        </tr>                    <tr>
-                            <td>reddit.com</td>
-                            <td>02/09/1945</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -92,32 +72,12 @@
                         </tr>
                     </thread>
                     <tbody>
-                        {{#each items}}
+                        {{#each passwordItems}}
                             <tr>
-                                <td>{{description}}</td>
-                                <td>{{date}}</td>
+                                <td>{{url}}</td>
+                                <td>{{lastAccessDay}}</td>
                             </tr>
                         {{/each}}
-                        <tr>
-                            <td>facebook.com</td>
-                            <td>02/09/1945</td>
-                        </tr>
-                        <tr>
-                            <td>gmail.com</td>
-                            <td>02/09/1945</td>
-                        </tr>                    <tr>
-                            <td>instagram.com</td>
-                            <td>02/09/1945</td>
-                        </tr>                    <tr>
-                            <td>x.com</td>
-                            <td>02/09/1945</td>
-                        </tr>                    <tr>
-                            <td>tinder.com</td>
-                            <td>02/09/1945</td>
-                        </tr>                    <tr>
-                            <td>reddit.com</td>
-                            <td>02/09/1945</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

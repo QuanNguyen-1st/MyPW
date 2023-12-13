@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const { isAuthenticated, isAdmin } = require('../../middlewares/session');
 
 const adminUserListController = require('../../app/controllers/admin/UserListController');
 
-router.get('/', adminUserListController.index);
-router.get('/check-user-list', adminUserListController.openCheckUserListForm);
-router.get('/check-user-info', adminUserListController.openCheckUserInfoForm);
-router.get('/check-frequence', adminUserListController.openCheckFrequenceForm);
+router.get('/', isAuthenticated, isAdmin, adminUserListController.index);
+router.get('/check-user-list', isAuthenticated, isAdmin, adminUserListController.openCheckUserListForm);
+router.get('/check-user-info', isAuthenticated, isAdmin, adminUserListController.openCheckUserInfoForm);
+router.get('/check-frequence', isAuthenticated, isAdmin, adminUserListController.openCheckFrequenceForm);
 
 module.exports = router;

@@ -3,7 +3,14 @@
     height: 100%;
     display: flex;
     flex-direction:column;
+    /* font-family: Roboto; */
     padding-inline: 50px;
+}
+
+.form-head{
+  background-color: #0D99FFB2;
+  border-radius: 10px;
+  border-color: rgb(27, 221, 251);
 }
 
 .passgen-title{
@@ -20,7 +27,9 @@
 .form-gen{
     background-color: aliceblue;
     border-radius: 10px;
-    
+    border-color: #0D99FFB2;
+    padding: 20px;
+    font-size: 20px;
 }
 
 .input-style{
@@ -30,6 +39,14 @@
 
 .result-gen{
     background-color: aliceblue;
+    padding: 20px;
     border-radius: 10px;
+    font-size: 20px;
     /* transition: 1s ; */
+}
+
+.result-head{
+    background-color: #0D99FFB2;
+    border-radius: 10px;
+    border-color: rgb(27, 221, 251);
 }
