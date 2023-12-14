@@ -5,10 +5,11 @@
         form.addEventListener('submit', function(event) {
           event.preventDefault();
           const formData = new FormData(form);
+          console.log(formData);
           for (let [key, value] of formData.entries()) {
             localStorage.setItem(key, value);
           }
-          form.submit();
+          form.submit()
         
         });
         // Retrieve checkbox values from localStorage and set them
@@ -72,7 +73,7 @@
           <div class="row form-head">
               <h3>Basic Generator</h3>
           </div>
-          <form action="/passgen/generate" method="POST">
+          <form action="/passgen" method="POST">
               <div class="row" style="padding:5px">
                   <div class="col-7">
                       <label for="KeyField" class="form-label">Seed</label>

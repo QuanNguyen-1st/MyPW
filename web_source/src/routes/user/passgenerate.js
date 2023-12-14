@@ -5,5 +5,5 @@ const { isAuthenticated } = require('../../middlewares/session');
 const passgenController = require('../../app/controllers/user/PassgenController');
 
 router.get('/', isAuthenticated, passgenController.index);
-router.post('/generate', isAuthenticated, passgenController.generate);
-module.exports = router;
+router.post('/', isAuthenticated, passgenController.generate);
+module.exports = router; 

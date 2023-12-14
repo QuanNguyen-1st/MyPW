@@ -25,8 +25,11 @@ class PassgenController {
         const useSpecialchar = req.body.useSpecialchar === 'on';
         const specialChars = useSpecialchar?  req.body.specialChars : '';
         const password = await generatePassword(length,useDigit, digits, specialChars, useSpecialchar);
-        req.session.password = password;
-        res.redirect('/passgen');
+        // req.session.password = password;
+        res.render('user/passgen', {
+            passgenActive: true,
+            password: password
+        });
     }
 }
 
