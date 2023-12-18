@@ -71,11 +71,11 @@
             </div>
             <div class="modal-body d-flex flex-column text-center">
                 <div>We have sent the verification code to your email address</div>
-                <div class="verification-code">
-                    <input type="text" class="verification-square" id="digit1" maxlength="1">
-                    <input type="text" class="verification-square" id="digit2" maxlength="1">
-                    <input type="text" class="verification-square" id="digit3" maxlength="1">
-                    <input type="text" class="verification-square" id="digit4" maxlength="1">
+                <div class="verification-code" id="otp">
+                    <input class="verification-square" type="text" id="first" maxlength="1" /> 
+                    <input class="verification-square" type="text" id="second" maxlength="1" /> 
+                    <input class="verification-square" type="text" id="third" maxlength="1" /> 
+                    <input class="verification-square" type="text" id="fourth" maxlength="1" /> 
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">
@@ -86,22 +86,136 @@
 </div>
 
 
+<div class="modal fade" id="invalidModal" tabindex="-1" role="dialog" aria-labelledby="invalidModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal" role="document">
+        <div class="modal-content" style="background: #D9D9D9E5;">
+            <div class="modal-header d-flex justify-content-center">
+                <h5 class="modal-title" id="invalidModalLabel">Invalid</h5>
+            </div>
+            <div class="modal-body d-flex flex-column text-center">
+                <div>Invalid Email</div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" onclick="closeInvalidEmailModal()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="wrongCodeModal" tabindex="-1" role="dialog" aria-labelledby="wrongCodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal" role="document">
+        <div class="modal-content" style="background: #D9D9D9E5;">
+            <div class="modal-header d-flex justify-content-center">
+                <h5 class="modal-title" id="wrongCodeModalLabel">Wrong Code</h5>
+            </div>
+            <div class="modal-body d-flex flex-column text-center">
+                <div>Wrong Code</div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" onclick="closeWrongCodeModal()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="successCodeModal" tabindex="-1" role="dialog" aria-labelledby="successCodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal" role="document">
+        <div class="modal-content" style="background: #D9D9D9E5;">
+            <div class="modal-header d-flex justify-content-center">
+                <h5 class="modal-title" id="successCodeModalLabel">Success 2FA</h5>
+            </div>
+            <div class="modal-body d-flex flex-column text-center">
+                <div>Success 2FA</div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" onclick="success2FA()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
-    function showPanel() {
-        // Show the Bootstrap modal
-        $('#verificationCodeModal').modal('show');
-        // Prevent the form from submitting immediately
+    async function showPanel() {
+        const email = document.getElementById('email').value;
+        try {
+            const response = await fetch(`/generate-2fa/${email}`);
+            const result = await response.text();
+
+            if (result === "Success") {
+                $('#verificationCodeModal').modal('show');
+            } else {
+                $('#invalidModal').modal('show');
+            }
+        } catch (error) {
+            console.error("Network error:", error);
+        }
+
         return false;
     }
 
-    function submitForm() {
-        var digit1 = document.getElementById('digit1').value;
-        var digit2 = document.getElementById('digit2').value;
-        var digit3 = document.getElementById('digit3').value;
-        var digit4 = document.getElementById('digit4').value;
+    function closeInvalidEmailModal() {
+        $('#invalidModal').modal('hide');
+    }
 
-        var verificationCode = digit1 + digit2 + digit3 + digit4;
+    function closeWrongCodeModal() {
+        $('#wrongCodeModal').modal('hide');
+    }
 
-        $('#verificationCodeModal').modal('hide');
+    document.addEventListener("DOMContentLoaded", function(event) {
+        function OTPInput() {
+            const inputs = document.querySelectorAll('#otp > *[id]');
+            for (let i = 0; i < inputs.length; i++) { 
+                inputs[i].addEventListener('keydown', function(event) { 
+                    if (event.key === "Backspace" ) { 
+                        inputs[i].value= ''; 
+                        if (i !== 0) inputs[i - 1].focus(); 
+                    }
+                    else {
+                        if (event.keyCode > 47 && event.keyCode < 58) { 
+                            inputs[i].value = event.key; 
+                            if (i !== inputs.length - 1) inputs[i + 1].focus(); 
+                            event.preventDefault(); 
+                        } 
+                        else if (event.keyCode > 64 && event.keyCode < 91) { 
+                            inputs[i].value = String.fromCharCode(event.keyCode); 
+                            if (i !== inputs.length - 1) inputs[i + 1].focus(); 
+                            event.preventDefault();
+                        }
+                    } 
+                });
+            } 
+        } 
+        OTPInput();              
+    });
+
+    async function submitForm() {
+        var digit1 = document.getElementById('first').value;
+        var digit2 = document.getElementById('second').value;
+        var digit3 = document.getElementById('third').value;
+        var digit4 = document.getElementById('fourth').value;
+
+        var verificationCode = digit1 + digit2 + digit3 + digit4;   
+        try {
+            const response = await fetch(`/verify-2fa/${verificationCode}`);
+            const result = await response.text();
+
+            if (result === "Success") {
+                $('#verificationCodeModal').modal('hide');
+                $('#successCodeModal').modal('show');
+            } else {
+                $('#verificationCodeModal').modal('hide');
+                $('#wrongCodeModal').modal('show');
+            }
+        } catch (error) {
+            console.error("Network error:", error);
+        }
+    }
+
+    async function success2FA() {
+        $('#successCodeModal').modal('hide');
+        const response = await fetch('/2fa/newPassword', {
+            method: 'POST',
+        });
     }
 </script>   
