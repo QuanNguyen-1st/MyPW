@@ -5,7 +5,7 @@ cd web_source
 ```
 2. Install các module (và nên sử dụng node các phiên bản 16.0 || 18.0 || 20.0)
 ```cmd
-npm install -i 
+npm i 
 ```
 3. Tải SQL Server ([here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)) & SQL Server Management Studio (SSMS) ([here](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)).
 4. Ghi nhớ dòng MSSQLSERVER khi install xog SQL Server. !important
