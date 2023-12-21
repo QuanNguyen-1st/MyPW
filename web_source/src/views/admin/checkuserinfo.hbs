@@ -72,6 +72,8 @@
         color: #FFFFFF;
     }
 </style>
+
+{{#each userInfoItem}}
 <div class="info-container">
     <div class="container-fluid row row1">
         <div class="col-lg-3">
@@ -79,7 +81,7 @@
         </div>
         <div class="col-lg-6">
             <br><br><br>
-            <strong>NGUYEN VAN A</strong>
+            <strong>{{firstName}} {{lastName}}</strong>
         </div>
         <div class="col-lg-3">
             <br><br>
@@ -96,8 +98,8 @@
                 <h3 class="lead">User information</h3>
                 <ul>
                     <li class="contentnode"><dl><dt>UserID</dt><dd><a href="">001</a></dd></dl></li>
-                    <li class="contentnode"><dl><dt>Email</dt><dd><a href="">nva@hcmut.edu.vn</a></dd></dl></li>
-                    <li class="contentnode"><dl><dt>Country</dt><dd>Viet Nam</dd></dl></li>
+                    <li class="contentnode"><dl><dt>Email</dt><dd><a href="">{{email}}</a></dd></dl></li>
+                    <li class="contentnode"><dl><dt>Country</dt><dd>{{country}}</dd></dl></li>
                     <li class="contentnode"><dl><dt>Today access</dt><dd>2</dd></dl></li>
                     <li class="contentnode"><dl><dt>Total access</dt><dd>69</dd></dl></li>
                     <li class="contentnode">
@@ -114,13 +116,14 @@
             <div class="card-body">
                 <h3 class="lead">Login</h3>
                 <ul>
-                    <li class="contentnode"><dl><dt>First access</dt><dd>8/11/2023, 6:37 PM&nbsp;</dd></dl></li>
-                    <li class="contentnode"><dl><dt>Last access</dt><dd>09/11/2023, 9:22 AM&nbsp;</dd></dl></li>
+                    <li class="contentnode"><dl><dt>First access</dt><dd>{{firstAccess}}&nbsp;</dd></dl></li>
+                    <li class="contentnode"><dl><dt>Last access</dt><dd>{{lastAccess}}&nbsp;</dd></dl></li>
                 </ul>
             </div>
         </section>
     </div>
 </div>
+{{/each}}
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

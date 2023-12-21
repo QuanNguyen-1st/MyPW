@@ -49,7 +49,7 @@
         </div>
         <div class="col-lg-9">
             <br><br><br>
-            <strong>NGUYEN VAN A</strong>
+            <strong>{{currentAdminInfo.[0].firstName}} {{currentAdminInfo.[0].lastName}}</strong>
         </div>
     </div>
     <div class="row container-fluid row2">
@@ -59,8 +59,8 @@
                 <ul>
                     <li class="editprofile"><span><a href="" onclick="editProfile()">Edit profile</a></span></li>
                     <li class="contentnode"><dl><dt>UserID</dt><dd><a href="">001</a></dd></dl></li>
-                    <li class="contentnode"><dl><dt>Email</dt><dd><a href="">nva@hcmut.edu.vn</a></dd></dl></li>
-                    <li class="contentnode"><dl><dt>Country</dt><dd>Viet Nam</dd></dl></li>
+                    <li class="contentnode"><dl><dt>Email</dt><dd><a href="">{{currentAdminInfo.[0].email}}</a></dd></dl></li>
+                    <li class="contentnode"><dl><dt>Country</dt><dd>{{currentAdminInfo.[0].country}}</dd></dl></li>
                 </ul>
             </div>
         </section>
@@ -68,8 +68,8 @@
             <div class="card-body">
                 <h3 class="lead">Login</h3>
                 <ul>
-                    <li class="contentnode"><dl><dt>First access</dt><dd>8/11/2023, 6:37 PM&nbsp;</dd></dl></li>
-                    <li class="contentnode"><dl><dt>Last access</dt><dd>09/11/2023, 9:22 AM&nbsp;</dd></dl></li>
+                    <li class="contentnode"><dl><dt>First access</dt><dd>{{currentAdminInfo.[0].firstAccess}}&nbsp;</dd></dl></li>
+                    <li class="contentnode"><dl><dt>Last access</dt><dd>{{currentAdminInfo.[0].lastAccess}}&nbsp;</dd></dl></li>
                 </ul>
             </div>
         </section>

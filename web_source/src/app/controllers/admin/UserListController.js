@@ -8,13 +8,6 @@ class AdminUserListController {
             userlistActive: true
         });
     }
-    
-    // openCheckUserListForm(req, res, next) {
-    //     res.render('admin/checkuserlist', {
-    //         layout: 'main-admin',
-    //         userlistActive: true
-    //     });
-    // }
 
     // [GET] /check-user-list
     async openCheckUserListForm(req, res, next) {
@@ -27,10 +20,23 @@ class AdminUserListController {
     }
     
     // [GET] /check-user-info
-    openCheckUserInfoForm(req, res, next) {
+    // async openCheckUserInfoForm(req, res, next) {
+    //     const userInfo = await userModel.findUsername('john_doe');
+    //     res.render('admin/checkuserinfo', {
+    //         layout: 'main-admin',
+    //         userlistActive: true,
+    //         userInfoItem: userInfo
+    //     });
+    // }
+
+    // [GET] /check-user-info/:username
+    async openCheckUserInfoFormUsername(req, res, next) {
+        const username = req.params.username;
+        const userInfo = await userModel.findUsername(username);
         res.render('admin/checkuserinfo', {
             layout: 'main-admin',
-            userlistActive: true
+            userlistActive: true,
+            userInfoItem: userInfo
         });
     }
     

@@ -6,7 +6,8 @@ const adminUserListController = require('../../app/controllers/admin/UserListCon
 
 router.get('/', isAuthenticated, isAdmin, adminUserListController.index);
 router.get('/check-user-list', isAuthenticated, isAdmin, adminUserListController.openCheckUserListForm);
-router.get('/check-user-info', isAuthenticated, isAdmin, adminUserListController.openCheckUserInfoForm);
+// router.get('/check-user-info', isAuthenticated, isAdmin, adminUserListController.openCheckUserInfoForm);
+router.get('/check-user-info/:username', isAuthenticated, isAdmin, adminUserListController.openCheckUserInfoFormUsername);
 router.get('/check-frequence', isAuthenticated, isAdmin, adminUserListController.openCheckFrequenceForm);
 
 module.exports = router;
