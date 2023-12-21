@@ -1,3 +1,5 @@
+const userModel = require('../../models/user');
+
 class AdminUserListController {
     // [GET] /
     index(req, res, next) {
@@ -7,11 +9,20 @@ class AdminUserListController {
         });
     }
     
+    // openCheckUserListForm(req, res, next) {
+    //     res.render('admin/checkuserlist', {
+    //         layout: 'main-admin',
+    //         userlistActive: true
+    //     });
+    // }
+
     // [GET] /check-user-list
-    openCheckUserListForm(req, res, next) {
+    async openCheckUserListForm(req, res, next) {
+        const userlist = await userModel.getAllData();
         res.render('admin/checkuserlist', {
             layout: 'main-admin',
-            userlistActive: true
+            userlistActive: true,
+            userItems: userlist
         });
     }
     
