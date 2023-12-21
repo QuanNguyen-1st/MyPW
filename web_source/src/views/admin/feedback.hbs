@@ -163,8 +163,8 @@
             </div>
             <div class="filter-item">
                 <label for="inputUsername" class="form-label">Star</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Select</option>
+                <select class="form-select" aria-label="Default select example" id="inputStar">
+                    <option selected value="0">All stars</option>
                     <option value="1">1 Star</option>
                     <option value="2">2 Star</option>
                     <option value="3">3 Star</option>
@@ -191,7 +191,7 @@
                     <div class="col-lg-1">
                         <img src="https://img.hoidap247.com/picture/question/20210531/large_1622431721191.jpg?v=0" alt="Avatar" class="avatar circle">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="username-feedback col-lg-6">
                         <p>{{username}}</p>
                     </div>
                     <div class="date-time-feedback col-lg-3">{{time}}</div>
@@ -221,3 +221,45 @@
         </button>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const filterFeedbacks = function () {
+            const fromValue = document.getElementById('inputFrom').value;
+            const toValue = document.getElementById('inputTo').value;
+            const usernameValue = document.getElementById('inputUsername').value.toLowerCase();
+            const starValue = document.getElementById('inputStar').value;
+
+            const userItems = document.querySelectorAll('.feedback-item');
+
+            userItems.forEach(function (item) {
+                const username = item.querySelector('.username-feedback').textContent.toLowerCase();
+
+                const feedbackDate = item.querySelector('.date-time-feedback').textContent;
+                const feedbackDateParts = feedbackDate.split('/');
+                const feedbackFormattedDate = new Date(`${feedbackDateParts[2]}-${feedbackDateParts[1]}-${feedbackDateParts[0]}`);
+
+                const starsContainer = item.querySelector('.fixedStars');
+                const checkedStars = starsContainer.querySelectorAll('.checked-star');
+                const starCount = checkedStars.length;
+
+                var showItem;
+                if (starValue == "0")
+                    showItem = username.includes(usernameValue) &&
+                                 (!fromValue || feedbackFormattedDate >= new Date(fromValue)) &&
+                                 (!toValue || feedbackFormattedDate <= new Date(toValue));
+                else 
+                    showItem = username.includes(usernameValue) && starCount === parseInt(starValue, 10) &&
+                                 (!fromValue || feedbackFormattedDate >= new Date(fromValue)) &&
+                                 (!toValue || feedbackFormattedDate <= new Date(toValue));
+
+                item.style.display = showItem ? 'flex' : 'none';
+            });
+        };
+
+        document.getElementById('inputFrom').addEventListener('input', filterFeedbacks);
+        document.getElementById('inputTo').addEventListener('input', filterFeedbacks);
+        document.getElementById('inputUsername').addEventListener('input', filterFeedbacks);
+        document.getElementById('inputStar').addEventListener('input', filterFeedbacks);
+    });
+</script>
