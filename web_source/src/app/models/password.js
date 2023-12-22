@@ -18,6 +18,25 @@ class PasswordModel {
             throw err;
         }
     }
+	async comparedUsedPassword(username, password) {
+		try {
+			const pool = await poolPromise;
+			const queryString ='SELECT COUNT(*) AS count FROM PASSWORDITEM WHERE username = @username AND password = @password';
+			const result = await pool.request()
+				.input('username', sql.NVarChar(127), username)
+				.input('password', sql.NVarChar(127), password)
+				.query(queryString);
+			if (result.recordset.length > 0) {
+				return result.recordset[0]['count'];
+			} else { 
+				return null;
+			}
+
+		} catch (err) {
+			console.error('Error executing query:', err);
+			throw err;
+		}
+	}
 }
 
 module.exports = new PasswordModel;

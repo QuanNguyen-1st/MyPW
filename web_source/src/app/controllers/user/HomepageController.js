@@ -26,7 +26,7 @@ class HomepageController {
             dayExpire: formatDateTime(item.dayExpire),
             lastAccessDay: formatDateTime(item.lastAccessDay)
         }))
-        console.log(passwordItems);
+        // console.log(passwordItems);
         res.render('user/homepage', {
             homepageActive: true,
             user: user[0],

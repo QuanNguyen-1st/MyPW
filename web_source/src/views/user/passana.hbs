@@ -1,32 +1,36 @@
-
 <link rel="stylesheet" href="/css/passana.css">
-<div class="container row">
+<div class="container ">
     <div class="passana-title">
         Password Analyzer
     </div>
-    <div class="row g-1 justify-content-center">           
+    <div class="row justify-content-center">           
         <div class="col-6">
             <div class="row password-card">
-                <form action="POST"  >
+                <form action="/analyze" method="POST">
                     <div class="row form-head">
                         <h3>Analyze</h3>
                     </div>
-                    <input type="text" class="form-control input-style" placeholder="Be secure, stay safe!" id="password" name="password">
+                    <input type="text" class="form-control input-style" placeholder="Secure your password your way" id="password" name="password" value="{{password}}">
                     <div id="keyDescription" class="form-text">Password that need analyze</div>
+					<div class="row justify-content-end" style="padding:5px">
+						<button class="col-4 btn btn-primary" type="submit" onclick=""> ANALYZE </button>
+					</div>
                 </form>
-              <div class="row justify-content-end" style="padding:5px">
-                  <button class="col-4 btn btn-primary" type="submit"> GENERATE </button>
-              </div>
             </div>
 
         </div>
-        <div class="col-6 row-cols-1 g-1" id="card-holder">
+        <div class="col-6 grid" id="card-holder">
         {{#if criteria}}
             {{#each criteria}}
             <div class="card card-style">
                 <div class="card-body">
                     <h5 class="card-title"> {{this.title}}</h5>
-                    <span> {{this.content}} </span> 
+                    <h6 style="font-style: italic;"> {{this.content}} </h6> 
+					<span> 
+						{{#each this.msg}}
+							{{this}} <br>
+						{{/each}}
+					</span>
                 </div>
                 {{!-- Tail --}}
                 {{#if this.tail1}}

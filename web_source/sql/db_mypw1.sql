@@ -2,12 +2,13 @@
 -- GO
 
 -- -- Create a new database named 'YourDatabaseName'
--- CREATE DATABASE mypw;
--- GO
+CREATE DATABASE mypw;
+GO
 
 
 -- Create USER table
 USE mypw
+GO
 
 CREATE TABLE ACCOUNT (
     username VARCHAR(255) PRIMARY KEY,
@@ -49,9 +50,10 @@ CREATE TABLE PASSWORDITEM (
     dayExpire DATETIME,
     active BIT,
     password VARCHAR(255),
-    url VARCHAR(255) PRIMARY KEY,
+    url VARCHAR(255),
     lastAccessDay DATETIME,
-    FOREIGN KEY (username) REFERENCES USERS(username)
+    FOREIGN KEY (username) REFERENCES USERS(username),
+	PRIMARY KEY (username, url)
 );
 
 -- Create SYSTEM table
@@ -60,20 +62,22 @@ CREATE TABLE SYSTEM (
     contactEmail VARCHAR(255),
     ID INT PRIMARY KEY
 );
+GO
 
 INSERT INTO ACCOUNT VALUES
 ('admin', '123', 1),
 ('user', '123', 0),
 ('john_doe', 'password123', 1),
-('jane_smith', 'pass456', 0)
+('jane_smith', 'pass456', 0),
+('default', 'password', 0);
 
 -- Insert data into USER table
 INSERT INTO USERS VALUES
 ('John', 'Doe', 'admin', 1, 'USA', '2023-01-01', '2023-01-05', NULL, 'john.doe@example.com', 10),
 ('John', 'Doe', 'user', 1, 'USA', '2023-01-01', '2023-01-05', NULL, 'john.doe@example.com', 10),
 ('John', 'Doe', 'john_doe', 1, 'USA', '2023-01-01', '2023-01-05', NULL, 'john.doe@example.com', 10),
-('Jane', 'Smith', 'jane_smith', 1, 'Canada', '2023-01-02', '2023-01-06', NULL, 'jane.smith@example.com', 15);
-
+('Jane', 'Smith', 'jane_smith', 1, 'Canada', '2023-01-02', '2023-01-06', NULL, 'jane.smith@example.com', 15),
+('SinhVien', 'BachKhoa', 'default', 1, 'VietNam', '2023-01-02', '2023-12-22', NULL, 'someone@hcmut.edu.vn', 31);
 -- Insert data into FEEDBACK table
 INSERT INTO FEEDBACK VALUES
 ('john_doe', 1, 'Great product!', 5, NULL, '2023-01-03'),
@@ -88,3 +92,11 @@ INSERT INTO PASSWORDITEM VALUES
 INSERT INTO SYSTEM VALUES
 ('123 Main St, Cityville', 'info@example.com', 1);
 
+INSERT INTO PASSWORDITEM VALUES
+('default', '2023-11-01', '2023-12-01', 1, 'password', 'facebook.com', '2023-11-12'),
+('default', '2023-11-02', '2023-12-02', 1, 'password', 'example.com', '2023-11-12'),
+('default', '2023-11-03', '2023-12-03', 1, 'password', 'google.com', '2023-11-12'),
+('default', '2023-11-04', '2023-12-04', 1, 'password', 'gmail.com', '2023-11-12'),
+('default', '2023-11-05', '2023-12-05', 1, 'P@ssw0rd', 'drive.google.com', '2023-11-13'),
+('default', '2023-11-06', '2023-12-06', 1, 'P@ssw0rd', 'meta.com', '2023-11-15'),
+('default', '2023-11-07', '2023-12-07', 1, 'password', 'messenger.com', '2023-11-21');
