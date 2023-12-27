@@ -20,13 +20,14 @@ class HomepageController {
         const username = req.session.user.username;
         const user = await userModel.findUsername(username);
         var passwordItems = await passwordModel.getPasswordsFrom(username);
-        passwordItems = passwordItems.map((item) => ({
-            ...item,
-            dayCreate: formatDateTime(item.dayCreate),
-            dayExpire: formatDateTime(item.dayExpire),
-            lastAccessDay: formatDateTime(item.lastAccessDay)
-        }))
-        console.log(passwordItems);
+        if (passwordItems) {
+            passwordItems = passwordItems.map((item) => ({
+                ...item,
+                dayCreate: formatDateTime(item.dayCreate),
+                dayExpire: formatDateTime(item.dayExpire),
+                lastAccessDay: formatDateTime(item.lastAccessDay)
+            }))
+        }
         res.render('user/homepage', {
             homepageActive: true,
             user: user[0],

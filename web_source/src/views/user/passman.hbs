@@ -18,88 +18,208 @@
             <thead>
                 <tr>
                     <th style="width: 5%;">STT</th>
-                    <th style="width: 20%;">Mật khẩu</th>
-                    <th style="width: 20%;">Ngày tạo</th>
-                    <th style="width: 20%;">Thời gian</th>
-                    <th style="width: 5%;">Active</th>
-                    <th style="width: 15%;">Action</th>
-                    <th style="width: 15%;">Detail</th>
+                    <th>Website</th>
+                    <th style="width: 15%;">Mật khẩu</th>
+                    <th style="width: 25%;">Lần cuối truy cập</th>
+                    <th style="width: 8%;">Active</th>
+                    <th style="width: 8%;">Action</th>
+                    <th style="width: 8%;">Detail</th>
                 </tr>
             </thead>
             <tbody>
-                {{!-- <tr>
-                    <td>1</td>
-                    <td>hallo</td>
-                    <td>20/11/2003</td>
-                    <td>07:00:00</td>
-                    <td> <input type="checkbox"></td>
+                {{#each passwordItems}}
+                    <td>{{math @index "+" 1}}</td>
+                    <td style="test-align: left;">{{url}}</td>
+                    <td>••••••</td>
+                    <td>{{lastAccessDay}}</td>
+                    <td> <input type="checkbox" onclick="return false;"
+                        {{#if active}}
+                            checked
+                        {{/if}}
+                    ></td>
                     <td> 
                         <button class="edit-btn"></button>
                         <button class="delete-btn"></button>
                     </td>
-                    <td><button>Detail</button></td>
-                </tr>
-                --}}
+                    <td><button onclick="handleDetailBtnClick({{@index}})">Detail</button></td>
+                {{/each}}
             </tbody>
 
         </table>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-end" id="password-pagination"></ul>
+        </nav>
     </div>
-    <div class="select-container">
-        <div class="select-bar">
-            <button class="pre-btn"> &lt; </button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button class="next-btn"> &gt;</button>
-        </div>
-    </div>
+    
 </div>
 
 {{!--  script for Display --}}
 <script>
-const tableBody = document.querySelector('.password-table tbody'); // Get Table <tbody> DOM
 // Example data
-passList = [
-    {id: "1", pass:"hallo", date:"20/11/2003", time:"07:00:00", active: true},
-    {id: "2", pass:"deadline", date:"20/01/2003", time:"08:00:00",active: false},
-    {id: "3", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
-]
+{{!-- var passList = {};
 
-// Get Password List
-function getPassList(){
-    return passList;
-}
+const itemsPerPage = 5; // Number of items per page
+    let currentPage = 1; // Current page
+    const totalPages = Math.ceil(passList.length / itemsPerPage);
 
-//  Handle DetailButton onClick
-function handleDetailBtnClick(id){
-    // Set Cookie openPasswordID to passinfo
-    document.cookie = "openPasswordID="+id;
-    // Go to PassInfo
-    window.location.assign("/passinfo");
-}
+    // Function to display table data based on current page
+    function displayData(page) {
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const pageData = passList.slice(startIndex, endIndex);
 
-// Display all password in table
-function displayPasswordTable(){
-    passList = getPassList();
-    passList.forEach(function(pass){
-        const tableHolder = `
-                <td>${pass['id']}</td>
-                <td>${pass['pass']}</td>
-                <td>${pass['date']}</td>
-                <td>${pass['time']}</td>
-                <td> <input type="checkbox" onclick="return false;" ${pass['active']?"checked":""}></td>
-                <td> 
-                    <button class="edit-btn"></button>
-                    <button class="delete-btn"></button>
-                </td>
-                <td><button onclick="handleDetailBtnClick(${pass['id']})">Detail</button></td>
-        `;
-        //console.log(tableHolder);
-        tableBody.innerHTML += tableHolder;
-    });
-}
+        const tbody = document.querySelector('.password-table tbody');
+        tbody.innerHTML = '';
 
-// __main__
-displayPasswordTable();
+        pageData.forEach(pass => {
+            const row = `
+                        <td>${pass['index']}</td>
+                        <td style="test-align: left;">${pass['website']}</td>
+                        <td>••••••</td>
+                        <td>${pass['lastAccessDay']}</td>
+                        <td> <input type="checkbox" onclick="return false;" ${pass['active']?"checked":""}></td>
+                        <td> 
+                            <button class="edit-btn"></button>
+                            <button class="delete-btn"></button>
+                        </td>
+                        <td><button onclick="handleDetailBtnClick(${pass['id']})">Detail</button></td>
+                    `;
+            tbody.innerHTML += row;
+        });
+    }
 
+    // Function to generate pagination links with numbered ellipsis
+    function generatePagination() {
+        const pagination = document.querySelector('#password-pagination');
+        pagination.innerHTML = '';
+
+        const maxPagesToShow = 2; // Maximum number of page links to display
+
+        // Calculate start and end page numbers for display
+        let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+        let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+        // Adjust startPage and endPage if the current page is near the beginning or end
+        if (endPage - startPage + 1 < maxPagesToShow) {
+            startPage = Math.max(1, endPage - maxPagesToShow + 1);
+        }
+
+        // Add "Previous" button
+        if (currentPage > 1) {
+            const prevLi = document.createElement('li');
+            prevLi.classList.add('page-item');
+            const prevLink = document.createElement('a');
+            prevLink.classList.add('page-link');
+            prevLink.href = '#';
+            prevLink.textContent = 'Previous';
+            prevLi.appendChild(prevLink);
+            pagination.appendChild(prevLi);
+
+            prevLink.addEventListener('click', () => {
+                currentPage--;
+                displayData(currentPage);
+                generatePagination();
+            });
+        }
+
+        // Add first page link
+        if (startPage > 1) {
+            const firstLi = document.createElement('li');
+            firstLi.classList.add('page-item');
+            const firstLink = document.createElement('a');
+            firstLink.classList.add('page-link');
+            firstLink.href = '#';
+            firstLink.textContent = '1';
+            firstLi.appendChild(firstLink);
+            pagination.appendChild(firstLi);
+
+            firstLink.addEventListener('click', () => {
+                currentPage = 1;
+                displayData(currentPage);
+                generatePagination();
+            });
+
+            // Add ellipsis if the gap between the first page and the startPage is more than 1
+            if (startPage - 1 > 1) {
+                const ellipsisLi = document.createElement('li');
+                ellipsisLi.classList.add('page-item');
+                const ellipsisLink = document.createElement('a');
+                ellipsisLink.classList.add('page-link');
+                ellipsisLink.href = '#';
+                ellipsisLink.textContent = '...';
+                ellipsisLi.appendChild(ellipsisLink);
+                pagination.appendChild(ellipsisLi);
+            }
+        }
+
+        // Add page links with numbered ellipsis
+        for (let i = startPage; i <= endPage; i++) {
+            const li = document.createElement('li');
+            li.classList.add('page-item');
+            const a = document.createElement('a');
+            a.classList.add('page-link');
+            a.href = '#';
+            a.textContent = i;
+            li.appendChild(a);
+            pagination.appendChild(li);
+
+            a.addEventListener('click', () => {
+                currentPage = i;
+                displayData(currentPage);
+                generatePagination();
+            });
+        }
+
+        // Add last page link
+        if (endPage < totalPages) {
+            // Add ellipsis if the gap between the endPage and the last page is more than 1
+            if (totalPages - endPage > 1) {
+                const ellipsisLi = document.createElement('li');
+                ellipsisLi.classList.add('page-item');
+                const ellipsisLink = document.createElement('a');
+                ellipsisLink.classList.add('page-link');
+                ellipsisLink.href = '#';
+                ellipsisLink.textContent = '...';
+                ellipsisLi.appendChild(ellipsisLink);
+                pagination.appendChild(ellipsisLi);
+            }
+
+            const lastLi = document.createElement('li');
+            lastLi.classList.add('page-item');
+            const lastLink = document.createElement('a');
+            lastLink.classList.add('page-link');
+            lastLink.href = '#';
+            lastLink.textContent = totalPages;
+            lastLi.appendChild(lastLink);
+            pagination.appendChild(lastLi);
+
+            lastLink.addEventListener('click', () => {
+                currentPage = totalPages;
+                displayData(currentPage);
+                generatePagination();
+            });
+        }
+
+        // Add "Next" button
+        if (currentPage < totalPages) {
+            const nextLi = document.createElement('li');
+            nextLi.classList.add('page-item');
+            const nextLink = document.createElement('a');
+            nextLink.classList.add('page-link');
+            nextLink.href = '#';
+            nextLink.textContent = 'Next';
+            nextLi.appendChild(nextLink);
+            pagination.appendChild(nextLi);
+
+            nextLink.addEventListener('click', () => {
+                currentPage++;
+                displayData(currentPage);
+                generatePagination();
+            });
+        }
+    }
+
+    // Initial display
+    displayData(currentPage);
+    generatePagination(); --}}
 </script>
