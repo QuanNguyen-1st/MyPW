@@ -1,8 +1,15 @@
+const userModel = require('../../models/user');
+
 class UserInfoController {
     // [GET] /
-    index(req, res, next) {
+    async index(req, res, next) {
+        const currentUser = req.session.user.username;
+        const currentUserInfo = await userModel.findUsername(currentUser);
+
         res.render('user/userinfo', {
-            userinfoActive: true
+            // layout: 'main-admin',
+            userinfoActive: true,
+            currentUserInfo: currentUserInfo
         });
     }
 }
