@@ -1,216 +1,235 @@
-/*
+-- /*
 use mypw
+GO
+
 -- ==== Create table ====
 CREATE TABLE mostUsedPassword(
-    password NVARCHAR(127) PRIMARY KEY
+	id	INT IDENTITY(1,1)		PRIMARY KEY,
+    password NVARCHAR(127)
 );
 
 CREATE TABLE mostCommonPassword2023(
-    password NVARCHAR(127) PRIMARY KEY
+	id	INT IDENTITY(1,1)		PRIMARY KEY,
+    password NVARCHAR(127)
 );
+GO
 
--- ==== Insert data ====
-INSERT INTO mostCommonPassword2023(password)
-VALUES ('123456'),
-  ('admin'),
-  ('12345678'),
-  ('123456789'),
-  ('1234'),
-  ('12345'),
-  ('password'),
-  ('123'),
-  ('Aa123456'),
-  ('1234567890'),
-  ('UNKNOWN'),
-  ('1234567'),
-  ('123123'),
-  ('111111'),
-  ('Password'),
-  ('12345678910'),
-  ('000000'),
-  ('admin123'),
-  ('********'),
-  ('user'),
-  ('1111'),
-  ('P@ssw0rd'),
-  ('root'),
-  ('654321'),
-  ('qwerty'),
-  ('Pass@123'),
-  ('******'),
-  ('112233'),
-  ('102030'),
-  ('ubnt'),
-  ('abc123'),
-  ('Aa@123456'),
-  ('abcd1234'),
-  ('1q2w3e4r'),
-  ('123321'),
-  ('err'),
-  ('qwertyuiop'),
-  ('87654321'),
-  ('987654321'),
-  ('Eliska81'),
-  ('123123123'),
-  ('11223344'),
-  ('987654321'),
-  ('demo'),
-  ('12341234'),
-  ('qwerty123'),
-  ('Admin@123'),
-  ('1q2w3e4r5t'),
-  ('11111111'),
-  ('pass'),
-  ('Demo@123'),
-  ('**********'),
-  ('azerty'),
-  ('admintelecom'),
-  ('Admin'),
-  ('123meklozed'),
-  ('666666'),
-  ('123456789'),
-  ('121212'),
-  ('1234qwer'),
-  ('admin@123'),
-  ('1qaz2wsx'),
-  ('*************'),
-  ('123456789a'),
-  ('Aa112233'),
-  ('asdfghjkl'),
-  ('Password1'),
-  ('888888'),
-  ('admin1'),
-  ('test'),
-  ('Aa123456@'),
-  ('asd123'),
-  ('qwer1234'),
-  ('123qwe'),
-  ('202020'),
-  ('asdf1234'),
-  ('Abcd@1234'),
-  ('banned'),
-  ('12344321'),
-  ('aa123456'),
-  ('1122334455'),
-  ('Abcd1234'),
-  ('guest'),
-  ('88888888'),
-  ('Admin123'),
-  ('secret'),
-  ('1122'),
-  ('admin1234'),
-  ('administrator'),
-  ('Password@123'),
-  ('q1w2e3r4'),
-  ('10203040'),
-  ('a123456'),
-  ('12345678a'),
-  ('555555'),
-  ('zxcvbnm'),
-  ('welcome'),
-  ('Abcd@123'),
-  ('Welcome@123'),
-  ('minecraft'),
-  ('101010'),
-  ('Pass@1234'),
-  ('123654'),
-  ('123456a'),
-  ('India@123'),
-  ('Ar123455'),
-  ('159357'),
-  ('qwe123'),
-  ('54321'),
-  ('password1'),
-  ('1029384756'),
-  ('1234567891'),
-  ('vodafone'),
-  ('jimjim30'),
-  ('Cindylee1'),
-  ('1111111111'),
-  ('azertyuiop'),
-  ('999999'),
-  ('adminHW'),
-  ('10203'),
-  ('gvt12345'),
-  ('12121212'),
-  ('12345678901'),
-  ('222222'),
-  ('7777777'),
-  ('12345678900'),
-  ('Kumar@123'),
-  ('147258'),
-  ('qwerty12345'),
-  ('asdasd'),
-  ('abc12345'),
-  ('bismillah'),
-  ('Heslo1234'),
-  ('1111111'),
-  ('a123456789'),
-  ('iloveyou'),
-  ('Passw0rd'),
-  ('aaaaaa'),
-  ('Flores123'),
-  ('12qwaszx'),
-  ('Welcome1'),
-  ('password123'),
-  ('123mudar'),
-  ('123456aA@'),
-  ('123qweasd'),
-  ('868689849'),
-  ('1234554321'),
-  ('motorola'),
-  ('q1w2e3r4t5'),
-  ('1234512345'),
-  ('undefined'),
-  ('1q2w3e'),
-  ('a1b2c3d4'),
-  ('admin123456'),
-  ('2402301978'),
-  ('Qwerty123'),
-  ('1qazxsw2'),
-  ('test123'),
-  ('Adam2312'),
-  ('Password123'),
-  ('1234567899'),
-  ('Aa195043'),
-  ('Test@123'),
-  ('111111111'),
-  ('admin12345'),
-  ('zaq12wsx'),
-  ('adminadmin'),
-  ('ADMIN'),
-  ('1234abcd'),
-  ('Menara'),
-  ('qwerty1234'),
-  ('123abc'),
-  ('theworldinyourhand'),
-  ('123456a@'),
-  ('Aa102030'),
-  ('987654'),
-  ('Mm123456'),
-  ('p@ssw0rd'),
-  ('Abc@1234'),
-  ('131313'),
-  ('1a2b3c4d'),
-  ('123654789'),
-  ('changeme'),
-  ('12345679'),
-  ('student'),
-  ('senha123'),
-  ('1234567a'),
-  ('user1234'),
-  ('abc123456'),
-  ('master'),
-  ('12345qwert'),
-  ('1234561'),
-  ('adminisp'),
-  ('azerty123'),
-  ('pakistan'),
-  ('aaaaaaaa'),
-  ('a1234567'),
-  ('P@55w0rd'),
-  ('P@$$w0rd'),
-  ('qwerty123456');
+CREATE OR ALTER FUNCTION dbo.checkCommonPassword(@password NVARCHAR(127))
+RETURNS BIT
+AS
+BEGIN
+  DECLARE @result BIT = 0;
+  
+  IF EXISTS (SELECT * FROM mostUsedPassword WHERE password = @password)
+    SET @result = 1;
+  ELSE IF EXISTS (SELECT * FROM mostCommonPassword2023 WHERE password = @password)
+    SET @result = 1;
+
+  RETURN @result;
+END
+GO
+-- ==== Insert data 
+INSERT INTO mostCommonPassword2023(password) VALUES ('ubnt');
+INSERT INTO mostCommonPassword2023(password) VALUES ('q1w2e3r4t5');
+INSERT INTO mostCommonPassword2023(password) VALUES ('password');
+INSERT INTO mostCommonPassword2023(password) VALUES ('theworldinyourhand');
+INSERT INTO mostCommonPassword2023(password) VALUES ('secret');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Aa123456');
+INSERT INTO mostCommonPassword2023(password) VALUES ('India@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('54321');
+INSERT INTO mostCommonPassword2023(password) VALUES ('administrator');
+INSERT INTO mostCommonPassword2023(password) VALUES ('senha123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('sinhviennam7');
+INSERT INTO mostCommonPassword2023(password) VALUES ('aa123456');
+INSERT INTO mostCommonPassword2023(password) VALUES ('131313');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Admin');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Password');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1111111');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Demo@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234567a');
+INSERT INTO mostCommonPassword2023(password) VALUES ('master');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12345678');
+INSERT INTO mostCommonPassword2023(password) VALUES ('a123456');
+INSERT INTO mostCommonPassword2023(password) VALUES ('admin1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12345679');
+INSERT INTO mostCommonPassword2023(password) VALUES ('user1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('**********');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123321');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234567');
+INSERT INTO mostCommonPassword2023(password) VALUES ('admin123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234567899');
+INSERT INTO mostCommonPassword2023(password) VALUES ('minecraft');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1qaz2wsx');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Abcd1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1q2w3e4r');
+INSERT INTO mostCommonPassword2023(password) VALUES ('azerty123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('welcome');
+INSERT INTO mostCommonPassword2023(password) VALUES ('112233');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Welcome@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123meklozed');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1122334455');
+INSERT INTO mostCommonPassword2023(password) VALUES ('101010');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Qwerty123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('987654321');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Admin123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('888888');
+INSERT INTO mostCommonPassword2023(password) VALUES ('202020');
+INSERT INTO mostCommonPassword2023(password) VALUES ('UNKNOWN');
+INSERT INTO mostCommonPassword2023(password) VALUES ('11111111');
+INSERT INTO mostCommonPassword2023(password) VALUES ('111111');
+INSERT INTO mostCommonPassword2023(password) VALUES ('asdfghjkl');
+INSERT INTO mostCommonPassword2023(password) VALUES ('zxcvbnm');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12345678900');
+INSERT INTO mostCommonPassword2023(password) VALUES ('admin12345');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1122');
+INSERT INTO mostCommonPassword2023(password) VALUES ('P@55w0rd');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Password123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234567891');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123456a@');
+INSERT INTO mostCommonPassword2023(password) VALUES ('iloveyou');
+INSERT INTO mostCommonPassword2023(password) VALUES ('abc12345');
+INSERT INTO mostCommonPassword2023(password) VALUES ('555555');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Eliska81');
+INSERT INTO mostCommonPassword2023(password) VALUES ('654321');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Aa123456@');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Adam2312');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234abcd');
+INSERT INTO mostCommonPassword2023(password) VALUES ('987654');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12345qwert');
+INSERT INTO mostCommonPassword2023(password) VALUES ('qwe123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('pakistan');
+INSERT INTO mostCommonPassword2023(password) VALUES ('a1234567');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Password@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12121212');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Admin@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('abcd1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('121212');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1a2b3c4d');
+INSERT INTO mostCommonPassword2023(password) VALUES ('222222');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1qazxsw2');
+INSERT INTO mostCommonPassword2023(password) VALUES ('asdf1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('qwer1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Flores123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Abcd@1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Aa112233');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Aa@123456');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Password1');
+INSERT INTO mostCommonPassword2023(password) VALUES ('bismillah');
+INSERT INTO mostCommonPassword2023(password) VALUES ('azertyuiop');
+INSERT INTO mostCommonPassword2023(password) VALUES ('demo');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123456789');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234554321');
+INSERT INTO mostCommonPassword2023(password) VALUES ('asdasd');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Heslo1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Ar123455');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234512345');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123qwe');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234567890');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123654');
+INSERT INTO mostCommonPassword2023(password) VALUES ('q1w2e3r4');
+INSERT INTO mostCommonPassword2023(password) VALUES ('7777777');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Menara');
+INSERT INTO mostCommonPassword2023(password) VALUES ('asd123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234qwer');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Test@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('bachkhoa');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12qwaszx');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12345');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123mudar');
+INSERT INTO mostCommonPassword2023(password) VALUES ('868689849');
+INSERT INTO mostCommonPassword2023(password) VALUES ('user');
+INSERT INTO mostCommonPassword2023(password) VALUES ('gvt12345');
+INSERT INTO mostCommonPassword2023(password) VALUES ('admin');
+INSERT INTO mostCommonPassword2023(password) VALUES ('aaaaaa');
+INSERT INTO mostCommonPassword2023(password) VALUES ('111111111');
+INSERT INTO mostCommonPassword2023(password) VALUES ('admin@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12341234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('a123456789');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12344321');
+INSERT INTO mostCommonPassword2023(password) VALUES ('aaaaaaaa');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123123123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123654789');
+INSERT INTO mostCommonPassword2023(password) VALUES ('guest');
+INSERT INTO mostCommonPassword2023(password) VALUES ('vodafone');
+INSERT INTO mostCommonPassword2023(password) VALUES ('adminHW');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12345678910');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1029384756');
+INSERT INTO mostCommonPassword2023(password) VALUES ('qwerty12345');
+INSERT INTO mostCommonPassword2023(password) VALUES ('admin123456');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Passw0rd');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Pass@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('password123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('adminisp');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123456');
+INSERT INTO mostCommonPassword2023(password) VALUES ('jimjim30');
+INSERT INTO mostCommonPassword2023(password) VALUES ('motorola');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Aa195043');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1111');
+INSERT INTO mostCommonPassword2023(password) VALUES ('88888888');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Pass@1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('********');
+INSERT INTO mostCommonPassword2023(password) VALUES ('admintelecom');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123456789a');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234561');
+INSERT INTO mostCommonPassword2023(password) VALUES ('159357');
+INSERT INTO mostCommonPassword2023(password) VALUES ('147258');
+INSERT INTO mostCommonPassword2023(password) VALUES ('p@ssw0rd');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Abc@1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('qwerty1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1111111111');
+INSERT INTO mostCommonPassword2023(password) VALUES ('pass');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123456a');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123456aA@');
+INSERT INTO mostCommonPassword2023(password) VALUES ('999999');
+INSERT INTO mostCommonPassword2023(password) VALUES ('ADMIN');
+INSERT INTO mostCommonPassword2023(password) VALUES ('P@ssw0rd');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12345678901');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123abc');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Mm123456');
+INSERT INTO mostCommonPassword2023(password) VALUES ('******');
+INSERT INTO mostCommonPassword2023(password) VALUES ('qwerty123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Aa102030');
+INSERT INTO mostCommonPassword2023(password) VALUES ('test');
+INSERT INTO mostCommonPassword2023(password) VALUES ('student');
+INSERT INTO mostCommonPassword2023(password) VALUES ('000000');
+INSERT INTO mostCommonPassword2023(password) VALUES ('87654321');
+INSERT INTO mostCommonPassword2023(password) VALUES ('zaq12wsx');
+INSERT INTO mostCommonPassword2023(password) VALUES ('err');
+INSERT INTO mostCommonPassword2023(password) VALUES ('10203040');
+INSERT INTO mostCommonPassword2023(password) VALUES ('2402301978');
+INSERT INTO mostCommonPassword2023(password) VALUES ('manchesterunited');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1q2w3e4r5t');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Cindylee1');
+INSERT INTO mostCommonPassword2023(password) VALUES ('102030');
+INSERT INTO mostCommonPassword2023(password) VALUES ('a1b2c3d4');
+INSERT INTO mostCommonPassword2023(password) VALUES ('11223344');
+INSERT INTO mostCommonPassword2023(password) VALUES ('12345678a');
+INSERT INTO mostCommonPassword2023(password) VALUES ('root');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Abcd@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Kumar@123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('abc123456');
+INSERT INTO mostCommonPassword2023(password) VALUES ('qwerty');
+INSERT INTO mostCommonPassword2023(password) VALUES ('adminadmin');
+INSERT INTO mostCommonPassword2023(password) VALUES ('Welcome1');
+INSERT INTO mostCommonPassword2023(password) VALUES ('P@$$w0rd');
+INSERT INTO mostCommonPassword2023(password) VALUES ('666666');
+INSERT INTO mostCommonPassword2023(password) VALUES ('azerty');
+INSERT INTO mostCommonPassword2023(password) VALUES ('password1');
+INSERT INTO mostCommonPassword2023(password) VALUES ('qwertyuiop');
+INSERT INTO mostCommonPassword2023(password) VALUES ('abc123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('test123');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1234');
+INSERT INTO mostCommonPassword2023(password) VALUES ('*************');
+INSERT INTO mostCommonPassword2023(password) VALUES ('10203');
+INSERT INTO mostCommonPassword2023(password) VALUES ('changeme');
+INSERT INTO mostCommonPassword2023(password) VALUES ('123qweasd');
+INSERT INTO mostCommonPassword2023(password) VALUES ('undefined');
+INSERT INTO mostCommonPassword2023(password) VALUES ('banned');
+INSERT INTO mostCommonPassword2023(password) VALUES ('admin1');
+INSERT INTO mostCommonPassword2023(password) VALUES ('1q2w3e');
+GO
 
 -- ==== CHUNK 0 ====
 INSERT INTO mostUsedPassword(password)
@@ -308,7 +327,7 @@ VALUES ('123456'),
 ('matthew'),
 ('access'),
 ('yankees'),
-('987654321'),
+-- ('987654321'),
 ('dallas'),
 ('austin'),
 ('thunder'),
@@ -10224,6 +10243,6 @@ VALUES ('16121991'),
 ('bubbles1'),
 ('brook'),
 ('brady');
-*/
+-- */
 
 -- SELECT * FROM mostUsedPassword;
