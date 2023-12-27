@@ -48,7 +48,7 @@
                         <button class="edit-btn"></button>
                         <button class="delete-btn" data-bs-toggle="modal" data-bs-target="#deletePassModal" data-bs-delete="{{url}}"></button>
                     </td>
-                    <td><button onclick="handleDetailBtnClick({{@index}})">Detail</button></td>
+                    <td><a href="/passman/{{url}}/passinfo" style="text-decoration:none;color:black;">Detail</td></a>
                 </tr>
                 {{/each}}
             </tbody>
@@ -117,6 +117,12 @@
 {{!--  script for Display --}}\
 <form id="delete-pass-form" method="post"></form>
 <script type="text/javascript">
+function handleDetailBtnClick(id){
+    // Set Cookie openPasswordID to passinfo
+    document.cookie = "openPasswordID="+id;
+    // Go to PassInfo
+    window.location.assign("/passman/passinfo");
+}
 // Example data
         var deleteId;
         var deleteBtn = document.getElementById('btn-delete-pass');

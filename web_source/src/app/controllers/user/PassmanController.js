@@ -52,6 +52,27 @@ class PassmanController {
         passwordModel.deletePassword(username, id)
             .then(() => res.redirect('back'))
     }
+
+    // [GET] / passinfo
+    async passInfo(req, res, next) {
+        var passInfo = await passwordModel.findUrl(req.session.user.username, req.params.id);
+        if (passInfo) {
+            passInfo = {
+                ...passInfo,
+                dateCreate: passInfo.dayCreate.toLocaleDateString(),
+                timeCreate: passInfo.dayCreate.toLocaleTimeString(),
+                dateExpire: passInfo.dayExpire.toLocaleDateString(),
+                timeExpire: passInfo.dayExpire.toLocaleTimeString(),
+                lastAccessDay: formatDateTime(passInfo.lastAccessDay)
+            }
+            return res.render('user/passinfo', {
+                passmanActive: true,
+                passInfo: passInfo
+            });
+        }
+        else return res.redirect('back');
+        
+    }
 }
 
 module.exports = new PassmanController;

@@ -7,22 +7,22 @@
         <div class="func-container">
             <div class="detail-container">
                 <label for="detail">Mật khẩu chi tiết</label>
-                <input type="text" name="" id="detail" readonly>
+                <input type="text" name="" id="detail" value="{{passInfo.password}}" readonly>
 
                 <label for="create-date">Ngày tạo</label>
-                <input type="text" name="" id="create-date" readonly>
+                <input type="text" name="" id="create-date" value="{{passInfo.dateCreate}}" readonly>
 
                 <label for="expiration-date">Ngày hết hạn</label>
-                <input type="text" name="" id="expiration-date" readonly>
+                <input type="text" name="" id="expiration-date" value="{{passInfo.dateExpire}}" readonly>
 
                 <label for="create-time">Thời gian tạo</label>
-                <input type="text" name="" id="create-time" readonly>
+                <input type="text" name="" id="create-time" value="{{passInfo.timeCreate}}" readonly>
 
                 <label for="expiration-time">Thời gian hết hạn</label>
-                <input type="text" name="" id="expiration-time" readonly> 
+                <input type="text" name="" id="expiration-time" value="{{passInfo.timeExpire}}" readonly> 
 
-                <label for="login-apps">Danh sách ứng dụng đăng nhập</label>
-                <select name="" id="login-apps"></select>
+                <label for="login-apps">Website</label>
+                <input type="text" name="" id="expiration-time" value="{{passInfo.url}}" readonly> 
                 
                 
             </div>
@@ -122,7 +122,7 @@
     });
 </script>
 {{!-- Script for Display Information --}}
-<script>
+{{!-- <script>
 // Get DOMs
 const detailInp = document.querySelector("#detail");
 const createDateInp = document.querySelector("#create-date");
@@ -184,7 +184,7 @@ function displayPassInfo(){
   }
 }
 
-displayPassInfo();
+displayPassInfo(); --}}
 
 
 </script>

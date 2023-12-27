@@ -21,7 +21,7 @@ function route(app) {
     /*  User space */
     app.use('/', homepageRouter);
     app.use('/passman', passmanRouter);
-    app.use('/passinfo', passinfoRouter);
+    // app.use('/passinfo', passinfoRouter);
     app.use('/passgen', passgenRouter);
     app.use('/feedback', feedbackRouter);
     app.use('/userinfo', userinfoRouter);

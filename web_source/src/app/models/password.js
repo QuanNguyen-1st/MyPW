@@ -73,6 +73,25 @@ class PasswordModel {
 			throw err;
 		}
 	}
+
+	async findUrl(username, url) {
+		try {
+            const pool = await poolPromise;
+			const queryString = 'SELECT TOP 1 * FROM PASSWORDITEM WHERE username = @username AND url = @url';
+			const result = await pool.request()
+				.input('username', sql.NVarChar(127), username)
+				.input('url', sql.NVarChar(127), url)
+				.query(queryString);
+			if (result.recordset.length > 0) {
+				return result.recordset[0];
+			} else { 
+				return null;
+			}
+		} catch (err) {
+			console.error('Error executing query:', err);
+			throw err;
+		}
+	}
 }
 
 module.exports = new PasswordModel;

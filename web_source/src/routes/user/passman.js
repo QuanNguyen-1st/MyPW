@@ -8,4 +8,6 @@ router.get('/', isAuthenticated, passmanController.index);
 router.post('/', isAuthenticated, passmanController.postPassword);
 router.delete('/:id', isAuthenticated, passmanController.deletePassword);
 
+router.get('/:id/passinfo', isAuthenticated, passmanController.passInfo);
+
 module.exports = router;
