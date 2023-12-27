@@ -2,8 +2,8 @@
 -- GO
 
 -- -- Create a new database named 'YourDatabaseName'
-CREATE DATABASE mypw;
-GO
+-- CREATE DATABASE mypw;
+-- GO
 
 
 -- Create USER table
@@ -53,7 +53,7 @@ CREATE TABLE PASSWORDITEM (
     url VARCHAR(255),
     lastAccessDay DATETIME,
     FOREIGN KEY (username) REFERENCES USERS(username),
-	PRIMARY KEY (username, url)
+    PRIMARY KEY (username, url)
 );
 
 -- Create SYSTEM table

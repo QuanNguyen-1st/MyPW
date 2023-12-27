@@ -1,4 +1,10 @@
 <link rel="stylesheet" href="/css/passman.css">
+<style>
+    .form-row {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
 <div class="container">
     <div class="passman-title">
         Password Manager
@@ -10,7 +16,7 @@
         </div>
         <div class="button-container">
             <button class="export-btn">EXPORT</button>
-            <button class="create-btn">CREATE</button>
+            <button class="create-btn" data-bs-toggle="modal" data-bs-target="#addPassModal">CREATE</button>
         </div>
     </div>
     <div class="table-container">
@@ -19,8 +25,8 @@
                 <tr>
                     <th style="width: 5%;">STT</th>
                     <th>Website</th>
-                    <th style="width: 15%;">Mật khẩu</th>
-                    <th style="width: 25%;">Lần cuối truy cập</th>
+                    <th style="width: 15%;">Password</th>
+                    <th style="width: 25%;">Last access</th>
                     <th style="width: 8%;">Active</th>
                     <th style="width: 8%;">Action</th>
                     <th style="width: 8%;">Detail</th>
@@ -28,6 +34,7 @@
             </thead>
             <tbody>
                 {{#each passwordItems}}
+                <tr>
                     <td>{{math @index "+" 1}}</td>
                     <td style="test-align: left;">{{url}}</td>
                     <td>••••••</td>
@@ -39,9 +46,10 @@
                     ></td>
                     <td> 
                         <button class="edit-btn"></button>
-                        <button class="delete-btn"></button>
+                        <button class="delete-btn" data-bs-toggle="modal" data-bs-target="#deletePassModal" data-bs-delete="{{url}}"></button>
                     </td>
                     <td><button onclick="handleDetailBtnClick({{@index}})">Detail</button></td>
+                </tr>
                 {{/each}}
             </tbody>
 
@@ -52,174 +60,77 @@
     </div>
     
 </div>
+<!-- Modal -->
+<div class="modal fade" id="addPassModal" tabindex="-1" role="dialog" aria-labelledby="addPassModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="addPassModalLabel">Create new password</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <!--<span aria-hidden="true">&times;</span>-->
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md">
+                            <input id="" name="add_website" type="text" class="form-control" placeholder="Website">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md">
+                            <input id="" name="add_password" type="text" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-{{!--  script for Display --}}
-<script>
+<div class="modal fade" id="deletePassModal" tabindex="-1" role="dialog" aria-labelledby="deletePassModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="bi bi-person-check-fill" style="font-size:36px;"></i>
+                </div>
+                <h5 class="text-center mt-3">Are you sure?</h5>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <button id="btn-delete-pass" type="button" class="btn btn-outline-success btn-block" id="btn-delete-task" style="width: 100%;">Confirm</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-danger btn-block" data-bs-dismiss="modal" style="width: 100%;">Close</button>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{!--  script for Display --}}\
+<form id="delete-pass-form" method="post"></form>
+<script type="text/javascript">
 // Example data
-{{!-- var passList = {};
+        var deleteId;
+        var deleteBtn = document.getElementById('btn-delete-pass');
+        var deleteForm = document.forms['delete-pass-form'];
+        var deleteModal = document.getElementById('deletePassModal');
 
-const itemsPerPage = 5; // Number of items per page
-    let currentPage = 1; // Current page
-    const totalPages = Math.ceil(passList.length / itemsPerPage);
-
-    // Function to display table data based on current page
-    function displayData(page) {
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const pageData = passList.slice(startIndex, endIndex);
-
-        const tbody = document.querySelector('.password-table tbody');
-        tbody.innerHTML = '';
-
-        pageData.forEach(pass => {
-            const row = `
-                        <td>${pass['index']}</td>
-                        <td style="test-align: left;">${pass['website']}</td>
-                        <td>••••••</td>
-                        <td>${pass['lastAccessDay']}</td>
-                        <td> <input type="checkbox" onclick="return false;" ${pass['active']?"checked":""}></td>
-                        <td> 
-                            <button class="edit-btn"></button>
-                            <button class="delete-btn"></button>
-                        </td>
-                        <td><button onclick="handleDetailBtnClick(${pass['id']})">Detail</button></td>
-                    `;
-            tbody.innerHTML += row;
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            var btn = event.relatedTarget;
+            deleteId = btn.getAttribute('data-bs-delete');
+            console.log(deleteId);
         });
-    }
 
-    // Function to generate pagination links with numbered ellipsis
-    function generatePagination() {
-        const pagination = document.querySelector('#password-pagination');
-        pagination.innerHTML = '';
-
-        const maxPagesToShow = 2; // Maximum number of page links to display
-
-        // Calculate start and end page numbers for display
-        let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
-        let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
-
-        // Adjust startPage and endPage if the current page is near the beginning or end
-        if (endPage - startPage + 1 < maxPagesToShow) {
-            startPage = Math.max(1, endPage - maxPagesToShow + 1);
+        deleteBtn.onclick = function() {
+            deleteForm.action = '/passman/' + deleteId + '?_method=delete';
+            deleteForm.submit();
         }
-
-        // Add "Previous" button
-        if (currentPage > 1) {
-            const prevLi = document.createElement('li');
-            prevLi.classList.add('page-item');
-            const prevLink = document.createElement('a');
-            prevLink.classList.add('page-link');
-            prevLink.href = '#';
-            prevLink.textContent = 'Previous';
-            prevLi.appendChild(prevLink);
-            pagination.appendChild(prevLi);
-
-            prevLink.addEventListener('click', () => {
-                currentPage--;
-                displayData(currentPage);
-                generatePagination();
-            });
-        }
-
-        // Add first page link
-        if (startPage > 1) {
-            const firstLi = document.createElement('li');
-            firstLi.classList.add('page-item');
-            const firstLink = document.createElement('a');
-            firstLink.classList.add('page-link');
-            firstLink.href = '#';
-            firstLink.textContent = '1';
-            firstLi.appendChild(firstLink);
-            pagination.appendChild(firstLi);
-
-            firstLink.addEventListener('click', () => {
-                currentPage = 1;
-                displayData(currentPage);
-                generatePagination();
-            });
-
-            // Add ellipsis if the gap between the first page and the startPage is more than 1
-            if (startPage - 1 > 1) {
-                const ellipsisLi = document.createElement('li');
-                ellipsisLi.classList.add('page-item');
-                const ellipsisLink = document.createElement('a');
-                ellipsisLink.classList.add('page-link');
-                ellipsisLink.href = '#';
-                ellipsisLink.textContent = '...';
-                ellipsisLi.appendChild(ellipsisLink);
-                pagination.appendChild(ellipsisLi);
-            }
-        }
-
-        // Add page links with numbered ellipsis
-        for (let i = startPage; i <= endPage; i++) {
-            const li = document.createElement('li');
-            li.classList.add('page-item');
-            const a = document.createElement('a');
-            a.classList.add('page-link');
-            a.href = '#';
-            a.textContent = i;
-            li.appendChild(a);
-            pagination.appendChild(li);
-
-            a.addEventListener('click', () => {
-                currentPage = i;
-                displayData(currentPage);
-                generatePagination();
-            });
-        }
-
-        // Add last page link
-        if (endPage < totalPages) {
-            // Add ellipsis if the gap between the endPage and the last page is more than 1
-            if (totalPages - endPage > 1) {
-                const ellipsisLi = document.createElement('li');
-                ellipsisLi.classList.add('page-item');
-                const ellipsisLink = document.createElement('a');
-                ellipsisLink.classList.add('page-link');
-                ellipsisLink.href = '#';
-                ellipsisLink.textContent = '...';
-                ellipsisLi.appendChild(ellipsisLink);
-                pagination.appendChild(ellipsisLi);
-            }
-
-            const lastLi = document.createElement('li');
-            lastLi.classList.add('page-item');
-            const lastLink = document.createElement('a');
-            lastLink.classList.add('page-link');
-            lastLink.href = '#';
-            lastLink.textContent = totalPages;
-            lastLi.appendChild(lastLink);
-            pagination.appendChild(lastLi);
-
-            lastLink.addEventListener('click', () => {
-                currentPage = totalPages;
-                displayData(currentPage);
-                generatePagination();
-            });
-        }
-
-        // Add "Next" button
-        if (currentPage < totalPages) {
-            const nextLi = document.createElement('li');
-            nextLi.classList.add('page-item');
-            const nextLink = document.createElement('a');
-            nextLink.classList.add('page-link');
-            nextLink.href = '#';
-            nextLink.textContent = 'Next';
-            nextLi.appendChild(nextLink);
-            pagination.appendChild(nextLi);
-
-            nextLink.addEventListener('click', () => {
-                currentPage++;
-                displayData(currentPage);
-                generatePagination();
-            });
-        }
-    }
-
-    // Initial display
-    displayData(currentPage);
-    generatePagination(); --}}
 </script>

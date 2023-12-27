@@ -1,4 +1,5 @@
 const passwordModel = require('../../models/password');
+const user = require('../../models/user');
 
 const formatDateTime = (date) => {
     const options = {
@@ -32,7 +33,25 @@ class PassmanController {
         });
     }
 
+    // [POST] /
+    postPassword(req, res, next) {
+        var add_website = req.body['add_website'];
+        var add_password = req.body['add_password'];
+        if (add_website && add_password) {
+            const username = req.session.user.username;
+            passwordModel.addNewPassword(username, add_website, add_password)
+                .then(() => res.redirect('back'))
+        }
+        else return res.redirect('back');
+    }
     
+    // [DELETE] / :id
+    deletePassword(req, res, next) {
+        var id = req.params.id;
+        const username = req.session.user.username;
+        passwordModel.deletePassword(username, id)
+            .then(() => res.redirect('back'))
+    }
 }
 
 module.exports = new PassmanController;

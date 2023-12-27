@@ -37,6 +37,42 @@ class PasswordModel {
 			throw err;
 		}
 	}
+	async addNewPassword(username, website, password) {
+		try {
+			const dayCreate = new Date();
+			var dayExpire = new Date(dayCreate);
+			dayExpire.setFullYear(dayCreate.getFullYear() + 5);
+			const lastAccessDay = new Date(dayCreate);
+			const pool = await poolPromise;
+			const queryString = 'INSERT INTO PASSWORDITEM(username, dayCreate, dayExpire, active, password, url, lastAccessDay) VALUES (@username, @dayCreate, @dayExpire, @active, @password, @url, @lastAccessDay);';
+			const result = await pool.request()
+					.input('username', sql.NVarChar(127), username)
+					.input('dayCreate', sql.DateTime2, dayCreate.toISOString())
+					.input('dayExpire', sql.DateTime2, dayExpire.toISOString())
+					.input('active', sql.Bit, 1)
+					.input('password', sql.NVarChar(127), password)
+					.input('url', sql.NVarChar(127), website)
+					.input('lastAccessDay', sql.DateTime2, lastAccessDay.toISOString())
+					.query(queryString);
+	    } catch (err) {
+			console.error('Error executing query:', err);
+			throw err;
+		}
+	}
+
+	async deletePassword(username, website) {
+		try {
+            const pool = await poolPromise;
+			const queryString = 'DELETE FROM PASSWORDITEM WHERE username = @username AND url = @url';
+			const result = await pool.request()
+				.input('username', sql.NVarChar(127), username)
+				.input('url', sql.NVarChar(127), website)
+				.query(queryString);
+		} catch (err) {
+			console.error('Error executing query:', err);
+			throw err;
+		}
+	}
 }
 
 module.exports = new PasswordModel;
