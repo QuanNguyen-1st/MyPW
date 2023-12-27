@@ -335,7 +335,7 @@
             <div class="scrollable-content">
                 {{#each userItems}}
                 <div class="user-list__item">
-                    <h5 style="flex:0.9;">1</h5>
+                    <h5 style="flex:0.9;">{{math @index "+" 1}}</h5>
                     <div class="user-list__item__name-box">{{firstName}} {{lastName}}</div>
                     <h5 style="flex:1.6">{{firstAccess}}</h5>
                     <h5 class="user-list__item__last-access-box" style="flex:1.6">{{lastAccess}}</h5>

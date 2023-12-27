@@ -1,4 +1,5 @@
 const accountModel = require('../models/account');
+const userModel = require('../models/user');
 
 class LoginController {
     // [GET] /
@@ -22,6 +23,7 @@ class LoginController {
                 .then((result) => {
                     // console.log(result);
                     if (result && result[0].password === password) {
+                        userModel.updateAccess(username);
                         const user = { username: username};
                         if (result[0].isAdmin === false) {
                             req.session.user = user;

@@ -27,7 +27,13 @@ class AccountModel {
             const pool = await poolPromise;
             const result = await pool.request().query('SELECT username FROM ACCOUNT');
     
-            return result.recordset;
+            if (result.recordset.length > 0) {
+                // Return the recordset if there are results
+                return result.recordset;
+            } else {
+                // Return null if no results are found
+                return null;
+            }
         } catch (err) {
             console.error('Error executing query:', err);
             throw err;
@@ -44,6 +50,7 @@ class AccountModel {
             throw err;
         }
     }
+    
 }
 
 

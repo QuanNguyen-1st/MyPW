@@ -1,4 +1,6 @@
 const userModel = require('../../models/user');
+const feedbackModel = require('../../models/feedback');
+
 
 class AdminUserListController {
     // [GET] /
@@ -41,10 +43,20 @@ class AdminUserListController {
     }
     
     // [GET] /check-frequence
-    openCheckFrequenceForm(req, res, next) {
+    async openCheckFrequenceForm(req, res, next) {
+        const userlist = await userModel.getAllData();
+        const feedbacks = await feedbackModel.getAllData();
+        const totalAccess = userlist.reduce((accum, curr) => accum + curr.totalAccess, 0)
+        const feedbackCount = feedbacks.length;
+        const avgScore = feedbacks.reduce((accum, curr) => accum + curr.star, 0) / feedbackCount;
+        const floorAvgScore = Math.floor(avgScore);
         res.render('admin/checkfrequence', {
             layout: 'main-admin',
-            userlistActive: true
+            userlistActive: true,
+            totalAccess,
+            feedbackCount,
+            avgScore,
+            floorAvgScore
         });
     }
 }
