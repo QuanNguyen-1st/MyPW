@@ -202,7 +202,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        width: 95%;
+        width: 100%;
         padding: 0 10px 0 30px;
         margin-top: 2%;
     }
@@ -268,6 +268,7 @@
         flex: none;
         order: 0;
         flex-grow: 1;
+        min-width: 300px;
     }
     .user-list__item__view-btn-contain{
         flex: 2;
@@ -322,12 +323,18 @@
         </div>
     </div>
     <div class="user-list-container__info-header">
-        <h5 style="flex:0.9">ID</h5>
-        <h5 style="flex:2.5">Full Name</h5>
+        <!--<h5 style="flex:0.9">ID</h5>
+        <h5 style="flex:3">Full Name</h5>
         <h5 style="flex:1.6">First access</h5>
         <h5 style="flex:1.6">Last access</h5>
-        <h5 style="flex:0.8">Total access</h5>
-        <h5 style="flex:0.8">Enable</h5>
+        <h5 style="flex:0.9">Total access</h5>
+        <h5 style="flex:0.8">Enable</h5>-->
+        <h5 style="padding-left: 40px">ID</h5>
+        <h5 style="padding-left: 150px">Full Name</h5>
+        <h5 style="padding-left: 120px">First access</h5>
+        <h5 style="padding-left: 45px">Last access</h5>
+        <h5 style="padding-left: 12px">Total access</h5>
+        <h5 style="padding-left: 12px">Enable</h5>
         <div style="flex:2"></div>
     </div>
     <div class="user-list-container__list">
