@@ -21,3 +21,7 @@ DB_NAME=mypw
 ```bash
 npm start
 ```
+2. Kết nối với ứng dụng qua đường dẫn
+```url
+	https://localhost:3000
+```

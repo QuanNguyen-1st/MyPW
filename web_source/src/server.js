@@ -1,4 +1,6 @@
 const { poolPromise, sql } = require('./config/db');
+const https = require('https');
+const fs = require('fs');
 
 const express = require('express')
 
@@ -10,9 +12,15 @@ const nodemailer = require('nodemailer');
 
 const session = require('express-session');
 const app = express();
-const port = 3000;
+const PORT = 3000;
 
 const route = require('./routes');
+
+const options = {
+	key: fs.readFileSync('./cert/private.key'),
+	cert: fs.readFileSync('./cert/server.crt')
+};
+
 
 app.use(bodyParse.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -96,5 +104,7 @@ process.on('SIGINT', () => {
     });
 });
   
-
-app.listen(port, () => console.log(`App listening on port ${port}`));
+https.createServer(options, app).listen(PORT, () => {
+	console.log(`App listening on port ${PORT}`)
+});
+// app.listen(port, () => console.log(`App listening on port ${port}`));
