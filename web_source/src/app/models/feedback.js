@@ -1,7 +1,7 @@
 const { poolPromise, sql } = require('../../config/db');
 // const sql = require('mssql/msnodesqlv8');
 
-class AccountModel {
+class FeedbackModel {
     async getAllData() {
         try {
             const pool = await poolPromise;
@@ -24,7 +24,61 @@ class AccountModel {
             throw err;
         }
     }
+
+    async calculateAverageFeedbackStar() {
+        try {
+            const pool = await poolPromise;
+            const result = await pool
+                .request()
+                .query('SELECT AVG(CAST(star AS FLOAT)) AS averageStar, COUNT(*) AS feedbackCount FROM FEEDBACK');
+            const { averageStar, feedbackCount } = result.recordset[0];
+            return { averageStar, feedbackCount };
+        } catch (err) {
+            console.error('Error executing query:', err);
+            throw err;
+        }
+    }
+
+    async findFeedbackOfUser(username) {
+        try {
+            const queryString = 'SELECT * FROM FEEDBACK WHERE username = @username';
+            
+            const pool = await poolPromise;
+            const result = await pool.request()
+                .input('username', sql.NVarChar, username)
+                .query(queryString);
+            
+            if (result.recordset.length > 0) {
+                return result.recordset;
+            } else {
+                return null;
+            }
+        } catch (err) {
+            return null;
+        }
+    }
+
+    async addFeedback(username, des, star) {
+        try {
+            const queryString = 'INSERT INTO FEEDBACK (username, ID, Description, star, reply, time) VALUES (@username, 1, @des, @star, NULL, GETDATE());';
+            
+            const pool = await poolPromise;
+            const result = await pool.request()
+                .input('username', sql.NVarChar, username)
+                .input('des', sql.NVarChar, des) 
+                .input('star', sql.Int, star)
+                .query(queryString);
+            
+            if (result.recordset.length > 0) {
+                return result.recordset;
+            } else {
+                return null;
+            }
+        } catch (err) {
+            return null;
+        }
+    }
 }
 
 
-module.exports = new AccountModel;
+module.exports = new FeedbackModel;
