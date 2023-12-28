@@ -45,29 +45,56 @@
         </table>
     </div>
     <div class="select-container">
-        <div class="select-bar">
+        <ul class="pagination">
+            {{!-- <li class="pagination-item active-item">1</li>
+            <li class="pagination-item">2</li>
+            <li class="pagination-item">3</li> --}}
+        </ul>
+        {{!-- <div class="select-bar">
             <button class="pre-btn"> &lt; </button>
             <button>1</button>
             <button>2</button>
             <button>3</button>
             <button class="next-btn"> &gt;</button>
-        </div>
+        </div> --}}
     </div>
 </div>
 
-{{!-- Main script --}}
+{{!-- Init script --}}
 <script>
 const tableBody = document.querySelector('.password-table tbody'); // Get Table <tbody> DOM
+
+
 // Example data
-passList = [
+const expPassList = [
     {id: "1", pass:"hallo", date:"20/11/2003", time:"07:00:00", active: true},
     {id: "2", pass:"deadline", date:"20/01/2003", time:"08:00:00",active: false},
     {id: "3", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
+    {id: "4", pass:"deadline", date:"20/01/2003", time:"08:00:00",active: false},
+    {id: "5", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
+    {id: "6", pass:"deadline", date:"20/01/2003", time:"08:00:00",active: false},
+    {id: "7", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
+    {id: "8", pass:"deadline", date:"20/01/2003", time:"08:00:00",active: false},
+    {id: "9", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
+    {id: "10", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
+    {id: "11", pass:"deadline", date:"20/01/2003", time:"08:00:00",active: false},
+    {id: "12", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
+    {id: "13", pass:"deadline", date:"20/01/2003", time:"08:00:00",active: false},
+    {id: "14", pass:"yayyy", date:"29/11/2003", time:"05:00:00",active: true},
 ]
 
+
 // Get Password List
+async function fetchData(){
+    const res = await fetch("http://localhost:3000/passman/getPass",{method:'GET'})
+    console.log(res.json());
+}
+
+fetchData();
+
 function getPassList(){
-    return passList;
+
+    return expPassList;
 }
 
 //  Handle DetailButton onClick
@@ -78,10 +105,24 @@ function handleDetailBtnClick(id){
     window.location.assign("/passinfo");
 }
 
+
+//
+const PASSLIST = getPassList();
+let passList = PASSLIST;
+let currentPage = 1;
+const perPage = 5;
+let totalPage = Math.ceil(passList.length / perPage);
+const maxDisplayPagination = 5;
+
 // Display all password in table
 function displayPasswordTable(){
-    passList = getPassList();
-    passList.forEach(function(pass){
+    tableBody.innerHTML = "";
+    //
+    const beginIndex = perPage * (currentPage - 1);
+    const endIndex = beginIndex + perPage - 1;
+    displayList = passList.slice(beginIndex , endIndex + 1);
+    //
+    displayList.forEach(function(pass){
         const tableHolder = `
                 <td>${pass['id']}</td>
                 <td>${pass['pass']}</td>
@@ -99,7 +140,112 @@ function displayPasswordTable(){
     });
 }
 
-// __main__
-displayPasswordTable();
 
+
+</script>
+
+{{!-- Pagination --}}
+<script>
+    const pagination = document.querySelector('.pagination');
+    //
+
+    function displayPagination(){
+        pagination.innerHTML = "";
+        pagination.innerHTML += `<li class="pagination-item" onclick="handlePaginationPress(-2)">\<\<</li>`;
+        if (totalPage == 0){
+            pagination.innerHTML += `<li class="pagination-item active-item" >0</li>`;
+        }
+        else if (totalPage <= maxDisplayPagination){
+            for(let i = 1; i <= totalPage;  i++){
+                if (i == currentPage){
+                    pagination.innerHTML += `<li class="pagination-item active-item" onclick="handlePaginationPress(${i})">${i}</li>`;
+                }
+                else{
+                    pagination.innerHTML += `<li class="pagination-item" onclick="handlePaginationPress(${i})">${i}</li>`;
+                }
+            }
+        }
+        else {
+            if (currentPage <  3 ){
+                for(let i = 1; i <= maxDisplayPagination;  i++){
+                    if (i == currentPage){
+                        pagination.innerHTML += `<li class="pagination-item active-item" onclick="handlePaginationPress(${i})">${i}</li>`;
+                    }
+                    else{
+                        pagination.innerHTML += `<li class="pagination-item" onclick="handlePaginationPress(${i})">${i}</li>`;
+                    }
+                }
+            }
+            else if (currentPage > totalPage - 2){
+                    for(let i = totalPage - maxDisplayPagination + 1 ; i <= totalPage;  i++){
+                        if (i == currentPage){
+                            pagination.innerHTML += `<li class="pagination-item active-item" onclick="handlePaginationPress(${i})">${i}</li>`;
+                        }
+                        else{
+                            pagination.innerHTML += `<li class="pagination-item" onclick="handlePaginationPress(${i})">${i}</li>`;
+                    }
+                }
+            }
+            else{
+                for(let i = currentPage - 2  ; i <= currentPage + 2;  i++){
+                    if (i == currentPage){
+                        pagination.innerHTML += `<li class="pagination-item active-item" onclick="handlePaginationPress(${i})">${i}</li>`;
+                    }
+                    else{
+                        pagination.innerHTML += `<li class="pagination-item" onclick="handlePaginationPress(${i})">${i}</li>`;
+                    }
+                }                
+            }
+        }
+
+        pagination.innerHTML += `
+            <li class="pagination-item last-item" onclick="handlePaginationPress(-1)">\>\></li>
+        `;
+    }
+
+    function handlePaginationPress(i){
+        // -2: first item
+        // -1: last item
+        if (i == -2){
+            currentPage = 1;
+        }
+        else if ( i == -1){
+            currentPage = totalPage;
+        }
+        else{
+            currentPage = i;
+        }
+
+        displayPagination();
+        displayPasswordTable();
+    }
+</script>
+
+{{!-- Script for search --}}
+<script>
+
+    function filter(filterText, value){
+        if (filter == "") return true;
+        return value.includes(filterText);
+    }
+
+    //Handle search onChange
+    document.querySelector("#search-text").addEventListener('keydown',function(event){
+        if (event.key === 'Enter'){
+            const filterText = this.value;
+            passList = PASSLIST.filter((pass)=>filter(filterText,pass['pass']));
+            currentPage = 1;
+            totalPage = Math.ceil(passList.length / perPage);
+            displayPagination();
+            displayPasswordTable();
+        }
+    });
+</script>
+
+
+{{!-- Main script --}}
+<script>
+    displayPagination();
+    displayPasswordTable();
+    
 </script>

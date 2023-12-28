@@ -9,6 +9,7 @@ class PasswordModel {
                 .input('username', sql.NVarChar, username)
                 .query(queryString);
             if (result.recordset.length > 0) {
+                // console.log(result.recordset);
                 return result.recordset;
             } else {
                 return null;
