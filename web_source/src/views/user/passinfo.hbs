@@ -42,7 +42,7 @@
 		<div class="modal-content">
 			<!-- Modal body -->
 			<div class="modal-body">  
-			<form action="/passman/{{passInfo.url}}/passinfo" method="PATCH" id="EditForm">
+			<form action="/passman/{{passInfo.url}}/passinfo?_method=patch" method="post" id="EditForm">
 				<div class="modalTitle" style="text-align: center;">Edit Password</div>
 				<input type="password" class="form-control" name="oldPassword" placeholder="Old Password">
 				<input type="password" class="form-control" name="newPassword" placeholder="New Password">
@@ -52,7 +52,7 @@
 			<script>
 				function validate(){
 					const EditForm = document.getElementById("EditForm");
-					if (EditForm["newPassword"].value ==! EditForm["confirmPassword"].value){
+					if (EditForm["newPassword"].value !== EditForm["confirmPassword"].value){
 						console.log("Fail");
 						return;
 					}
