@@ -42,12 +42,12 @@
 		<div class="modal-content">
 			<!-- Modal body -->
 			<div class="modal-body">  
-			<form action="/passman/{{passInfo.url}}/passinfo?_method=patch" method="post" id="EditForm">
+			<form action="/passman/{{passInfo.url}}/passinfo?_method=patch" id="EditForm" method="post">
 				<div class="modalTitle" style="text-align: center;">Edit Password</div>
 				<input type="password" class="form-control" name="oldPassword" placeholder="Old Password">
 				<input type="password" class="form-control" name="newPassword" placeholder="New Password">
 				<input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
-				<button class="btn btn-primary" style="margin-inline:auto" data-bs-toggle="modal" onclick="validate()">Confirm</button> 
+				<button class="btn btn-primary" style="margin-inline:auto" type="submit" id="confirmPatchButton">Confirm</button> 
 			</form>
 			<script>
 				function validate(){
@@ -161,71 +161,4 @@
         } 
         OTPInput();
     });
-</script>
-{{!-- Script for Display Information --}}
-{{!-- <script>
-// Get DOMs
-const detailInp = document.querySelector("#detail");
-const createDateInp = document.querySelector("#create-date");
-const expiredDateInp = document.querySelector("#expiration-date");
-const createTimeInp = document.querySelector("#create-time");
-const expiredTimeInp = document.querySelector("#expiration-time");
-const loginAppSelect = document.querySelector("#login-apps");
-
-// Example Data for testing
-passInfoList =[
-  {id: "1", detail:"hallo", create_date:"20/11/2003", expired_date: "20/11/2003", create_time: "07:00:00", expired_time: "07:00:00", appList: ["Google", "Yahoo"]},
-  {id: "2", detail:"deadline", create_date:"20/01/2003", expired_date: "20/01/2003", create_time: "07:00:00", expired_time: "07:00:00", appList: ["Google", "X"]},
-  {id: "3", detail:"yayyy", create_date:"29/11/2003", expired_date: "29/11/2003", create_time: "07:00:00", expired_time: "07:00:00", appList: ["Google", "Facebook"]},
-];
-
-// Get password's ID
-function getOpenPassID(){
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let cookieList = decodedCookie.split(";");
-  for(let i = 0 ; i < cookieList.length; i++){
-    let nowCookie = cookieList[i].trim();
-    let temp = nowCookie.split("=");
-    if (temp[0] == "openPasswordID"){
-      return temp[1];
-    }
-  }
-  return -1;
-}
-
-// Get password information
-function getPassInfo(){
-  const displayId = getOpenPassID();
-  let passInfo = null;
-  passInfoList.forEach(function(pass){
-    if (pass['id'] == displayId){
-      passInfo = pass;
-      return false;
-    }
-  });
-  return passInfo;
-}
-
-function displayPassInfo(){
-  const passInfo = getPassInfo();
-  if (passInfo == null){
-    alert("Display Incomplete!!!");
-  }
-  else{
-     // alert("OK");
-     // console.log(passInfo);
-     detailInp.value = passInfo['detail'];
-     createDateInp.value = passInfo['create_date'];
-     expiredDateInp.value = passInfo['expired_date'];
-     createTimeInp.value = passInfo['create_time'];
-     expiredTimeInp.value = passInfo['expired_time'];
-     passInfo['appList'].forEach(function(app){
-        loginAppSelect.innerHTML += `<option>${app}</option>`;
-     });
-  }
-}
-
-displayPassInfo(); --}}
-
-
 </script>
