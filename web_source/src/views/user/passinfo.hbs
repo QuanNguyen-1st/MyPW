@@ -1,57 +1,98 @@
 <link rel="stylesheet" href="/css/passinfo.css">
 <div class="container">
-    <div class="passinfo-title">
-        Password Detail
-    </div>
-    <div class="body">
-        <div class="func-container">
-            <div class="detail-container">
-                <label for="detail">Mật khẩu chi tiết</label>
-                <input type="text" name="" id="detail" value="{{passInfo.password}}" readonly>
+		<div class="passinfo-title">
+				Password Detail
+		</div>
+		<div class="body">
+				<div class="func-container">
+						<div class="detail-container">
+								<label for="detail">Mật khẩu chi tiết</label>
+								<input type="text" name="" id="detail" value="{{passInfo.password}}" readonly>
 
-                <label for="create-date">Ngày tạo</label>
-                <input type="text" name="" id="create-date" value="{{passInfo.dateCreate}}" readonly>
+								<label for="create-date">Ngày tạo</label>
+								<input type="text" name="" id="create-date" value="{{passInfo.dateCreate}}" readonly>
 
-                <label for="expiration-date">Ngày hết hạn</label>
-                <input type="text" name="" id="expiration-date" value="{{passInfo.dateExpire}}" readonly>
+								<label for="expiration-date">Ngày hết hạn</label>
+								<input type="text" name="" id="expiration-date" value="{{passInfo.dateExpire}}" readonly>
 
-                <label for="create-time">Thời gian tạo</label>
-                <input type="text" name="" id="create-time" value="{{passInfo.timeCreate}}" readonly>
+								<label for="create-time">Thời gian tạo</label>
+								<input type="text" name="" id="create-time" value="{{passInfo.timeCreate}}" readonly>
 
-                <label for="expiration-time">Thời gian hết hạn</label>
-                <input type="text" name="" id="expiration-time" value="{{passInfo.timeExpire}}" readonly> 
+								<label for="expiration-time">Thời gian hết hạn</label>
+								<input type="text" name="" id="expiration-time" value="{{passInfo.timeExpire}}" readonly> 
 
-                <label for="login-apps">Website</label>
-                <input type="text" name="" id="expiration-time" value="{{passInfo.url}}" readonly> 
-                
-                
-            </div>
-            <div class="btn-container">
-                <button class="btn edit-btn" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                <button class="analyse-btn" data-bs-toggle="modal" data-bs-target="#analyseModal">Analyse</button>
-            </div>
-        </div>
-        <div class="image">
-            <img src="/img/detail_img.png" alt="Password Detail">
-        </div>
-    </div>
+								<label for="login-apps">Website</label>
+								<input type="text" name="" id="url" value="{{passInfo.url}}" readonly> 
+						</div>
+						<div class="btn-container">
+								<button class="btn edit-btn" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+								<button class="analyse-btn" data-bs-toggle="modal" data-bs-target="#analyseModal">Analyse</button>
+						</div>
+				</div>
+				<div class="image">
+						<img src="/img/detail_img.png" alt="Password Detail">
+				</div>
+		</div>
 </div>
 
 
 {{!-- Edit modal --}}
 <div class="modal fade" id="editModal">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <!-- Modal body -->
-      <div class="modal-body">     
-                <div class="modalTitle" style="text-align: center;">Edit Password</div>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Old Password">
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="New Password">
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Confirm Password">
-                <button class="btn btn-primary" style="margin-inline:auto" data-bs-target="#verificationModal" data-bs-toggle="modal" >Confirm</button>        
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<!-- Modal body -->
+			<div class="modal-body">  
+			<form action="/passman/{{passInfo.url}}/passinfo" method="PATCH" id="EditForm">
+				<div class="modalTitle" style="text-align: center;">Edit Password</div>
+				<input type="password" class="form-control" name="oldPassword" placeholder="Old Password">
+				<input type="password" class="form-control" name="newPassword" placeholder="New Password">
+				<input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
+				<button class="btn btn-primary" style="margin-inline:auto" data-bs-toggle="modal" onclick="validate()">Confirm</button> 
+			</form>
+			<script>
+				function validate(){
+					const EditForm = document.getElementById("EditForm");
+					if (EditForm["newPassword"].value ==! EditForm["confirmPassword"].value){
+						console.log("Fail");
+						return;
+					}
+					console.log("Success");
+					EditForm.submit();
+				}
+			</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{!-- Success modal
+<div class="modal fade" id="successModal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="modalTitle" style="text-align: center;">Success</div>
+				<div class="notice">Password updated successfully!</div>
+				<button class="btn btn-primary" style="margin-inline:auto" data-bs-dismiss="modal">OK</button>        
+			</div>
+		</div>
+	</div>
+</div>
+ --}}
+
+
+{{!-- Fail modal --}}
+<div class="modal fade" id="failModal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="modalTitle" style="text-align: center;">Fail</div>
+				<div class="notice"> new password and confirm password must be the same! </div>
+				<button class="btn btn-primary" style="margin-inline:auto" data-bs-dismiss="modal">OK</button>        
+			</div>
+		</div>
+	</div>
 </div>
 
 {{!-- Verify Modal --}}
