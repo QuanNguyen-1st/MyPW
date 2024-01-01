@@ -193,7 +193,7 @@
                   </div>
                 </div>
               <div class="row justify-content-end" style="padding:5px">
-                  <button class="col-2 btn btn-primary" type="submit"> GENERATE </button>
+                  <button class="col-2 btn btn-primary" type="submit"> Generate </button>
               </div>
           </form>
         </div>  
@@ -206,13 +206,13 @@
         </div>
         <label for="password" style="padding: 10px;">Your generated password</label>
         {{!-- TODO: Add that newpasspage --}}
-        <form action="" method="" class="row gap-2 justify-content-center">
+        <form action="/analyze" method="post" class="row gap-2 justify-content-center">
           <div class="col-5">
             <input type="text" class="form-control input-style" style="font-size: large;" value="{{password}}" maxlength="32" id="password" name="password" aria-describedby="keyDescription">
           </div>
           <div class="col-2 d-grid">
             <button class="btn btn-primary btn-block" type="button" onclick="copyPassword()" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Copied!">
-              COPY
+              Copy
             </button>
             <script>
               function copyPassword() {
@@ -222,7 +222,7 @@
             </script>
           </div>
           <div class="col-2 d-grid">
-            <button class="btn btn-primary btn-block" {{!--type="submit" --}}> SAVE
+            <button class="btn btn-primary btn-block" {{!--type="submit" --}}> Analyse
             </button>
           </div>
         </form>

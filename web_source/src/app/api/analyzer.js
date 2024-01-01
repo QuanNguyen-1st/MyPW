@@ -99,14 +99,14 @@ async function matchUsed(username, password) {
 		return {
 			title: "Match used password",
 			content: "Commpare this password with other used password",
-			msg : ['Password did not appear in any other accounts'],
+			msg : ['Password has not been used'],
 			evaluation: 5,
 		};
 	}
 	return {
 		title: "Match used password",
 		content: "Commpare this password with other used password",
-		msg : ['Password appeared in ' + result + ' other accounts'],
+		msg : ['Password used for ' + result + ' other passwords in this account'],
 		evaluation: (result < 5) ? 3 : 1,
 	};
 }
