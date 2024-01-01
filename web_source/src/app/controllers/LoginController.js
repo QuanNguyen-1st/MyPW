@@ -44,7 +44,7 @@ class LoginController {
 
         }
         catch (error) {
-            // res.send("Invalid information");
+            res.send("Invalid information");
         }
     }
 

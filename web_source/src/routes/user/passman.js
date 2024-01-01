@@ -9,6 +9,6 @@ router.post('/', isAuthenticated, passmanController.postPassword);
 router.delete('/:id', isAuthenticated, passmanController.deletePassword);
 
 router.get('/:id/passinfo', isAuthenticated, passmanController.passInfo);
-router.patch('/:id/passinfo', isAuthenticated, passmanController.passInfo);
+router.patch('/:id/passinfo', isAuthenticated, passmanController.patchPassword);
 
 module.exports = router;

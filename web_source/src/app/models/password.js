@@ -74,6 +74,23 @@ class PasswordModel {
 		}
 	}
 
+	async patchPassword(username, url, password) {
+		try {
+            const pool = await poolPromise;
+			const lastAccessDay = new Date(dayCreate);
+			const queryString = 'UPDATE PASSWORDITEM SET password = @password, lastAccessDay = @lastAccessDay WHERE username = @username AND url = @url';
+			const result = await pool.request()
+				.input('username', sql.NVarChar(127), username)
+				.input('url', sql.NVarChar(127), url)
+				.input('password', sql.NVarChar(127), password)
+				.input('lastAccessDay', sql.DateTime2, lastAccessDay.toISOString())
+				.query(queryString);
+		} catch (err) {
+			console.error('Error executing query:', err);
+			throw err;
+		}
+	}
+
 	async findUrl(username, url) {
 		try {
             const pool = await poolPromise;

@@ -50,10 +50,10 @@ class PassmanController {
         var id = req.params.id;
         const username = req.session.user.username;
         passwordModel.deletePassword(username, id)
-            .then(() => res.redirect('back'))
+            .then(() => res.redirect('back'));
     }
 
-    // [GET] / passinfo
+    // [GET] / :id / passinfo
     async passInfo(req, res, next) {
         var passInfo = await passwordModel.findUrl(req.session.user.username, req.params.id);
         if (passInfo) {
@@ -71,6 +71,23 @@ class PassmanController {
             });
         }
         else return res.redirect('back');
+        
+    }
+
+    // [PATCH] / :id / passinfo
+    patchPassword(req, res, next) {
+        const id = req.params.id;
+        const username = req.session.user.username
+        passwordModel.findUrl(username, id)
+            .then((passItem) => {
+                if (passItem.password === req.body.oldPassword) {
+                    passwordModel.patchPassword(username, id, req.body.newPassword)
+                        .then(() => res.redirect('back'));
+                }
+                else return res.redirect('back');
+            }); 
+        
+
         
     }
 }
