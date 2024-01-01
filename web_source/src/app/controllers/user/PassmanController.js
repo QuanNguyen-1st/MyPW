@@ -40,7 +40,7 @@ class PassmanController {
         if (add_website && add_password) {
             const username = req.session.user.username;
             passwordModel.addNewPassword(username, add_website, add_password)
-                .then(() => res.redirect('back'))
+                .then(() => res.redirect('back'));
         }
         else return res.redirect('back');
     }

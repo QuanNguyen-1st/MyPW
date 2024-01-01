@@ -60,7 +60,7 @@ class FeedbackModel {
 
     async addFeedback(username, des, star) {
         try {
-            const queryString = 'INSERT INTO FEEDBACK (username, ID, Description, star, reply, time) VALUES (@username, 1, @des, @star, NULL, GETDATE());';
+            const queryString = 'INSERT INTO FEEDBACK (username, Description, star, reply, time) VALUES (@username, @des, @star, NULL, GETDATE());';
             
             const pool = await poolPromise;
             const result = await pool.request()
@@ -68,12 +68,35 @@ class FeedbackModel {
                 .input('des', sql.NVarChar, des) 
                 .input('star', sql.Int, star)
                 .query(queryString);
+        } catch (err) {
+            return null;
+        }
+    }
+
+    async deleteFeedback(username) {
+        try {
+            const queryString = 'DELETE FROM FEEDBACK WHERE username = @username;';
+            const pool = await poolPromise;
+
+            const result = await pool.request()
+                .input('username', sql.NVarChar, username)
+                .query(queryString);
+        } catch (err) {
+            return null;
+        }
+    }
+
+    async patchFeedback(username, des, star) {
+        try {
+            const queryString = 'UPDATE FEEDBACK SET Description = @des, star = @star WHERE username = @username;';
             
-            if (result.recordset.length > 0) {
-                return result.recordset;
-            } else {
-                return null;
-            }
+            const pool = await poolPromise;
+            const result = await pool.request()
+                .input('username', sql.NVarChar, username)
+                .input('des', sql.NVarChar, des) 
+                .input('star', sql.Int, star)
+                .query(queryString);
+
         } catch (err) {
             return null;
         }
