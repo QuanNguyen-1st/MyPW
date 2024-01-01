@@ -77,7 +77,7 @@ class PasswordModel {
 	async patchPassword(username, url, password) {
 		try {
             const pool = await poolPromise;
-			const lastAccessDay = new Date(dayCreate);
+			const lastAccessDay = new Date();
 			const queryString = 'UPDATE PASSWORDITEM SET password = @password, lastAccessDay = @lastAccessDay WHERE username = @username AND url = @url';
 			const result = await pool.request()
 				.input('username', sql.NVarChar(127), username)
