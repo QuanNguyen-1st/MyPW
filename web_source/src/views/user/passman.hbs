@@ -115,7 +115,9 @@
     </div>
 </div>
 {{!--  script for Display --}}\
-<form id="delete-pass-form" method="post"></form>
+<form id="delete-pass-form" method="post">
+	<input 
+</form>
 <script type="text/javascript">
 function handleDetailBtnClick(id){
     // Set Cookie openPasswordID to passinfo
@@ -137,6 +139,6 @@ function handleDetailBtnClick(id){
 
         deleteBtn.onclick = function() {
             deleteForm.action = '/passman/' + deleteId + '?_method=delete';
-            deleteForm.subSmit();
+            deleteForm.submit();
         }
 </script>
